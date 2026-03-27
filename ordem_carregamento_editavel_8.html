@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ordem de Carregamento - MOTZ TRANSPORTES</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&family=Barlow+Condensed:wght@400;600;700&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--orange:#e85d04;--dark:#1a1a1a;--mid:#444;--border:#ccc;--hbg:#2c2c2c}
+
+body{background:#d5d5d0;font-family:'Barlow',sans-serif;display:flex;flex-direction:column;align-items:center;padding:24px 10px 60px;min-height:100vh}
+.toolbar{background:var(--dark);color:#fff;padding:10px 18px;border-radius:8px;margin-bottom:18px;display:flex;gap:10px;align-items:center;font-size:13px;box-shadow:0 4px 16px rgba(0,0,0,.3);flex-wrap:wrap;width:100%;max-width:1160px}
+.toolbar span{color:#aaa;font-size:12px}
+.btn{background:var(--orange);color:#fff;border:none;padding:8px 16px;border-radius:5px;cursor:pointer;font-family:'Barlow',sans-serif;font-weight:700;font-size:12px;letter-spacing:.4px;transition:background .2s,transform .1s;white-space:nowrap}
+.btn:hover{background:#c94f00;transform:translateY(-1px)}
+.btn-outline{background:transparent;border:1.5px solid #555;color:#ccc}
+.btn-outline:hover{background:#2a2a2a;border-color:#888}
+.btn-green{background:#2a9d4f}
+.btn-green:hover{background:#228840}
+
+.main-wrap{display:flex;gap:20px;align-items:flex-start;width:100%;max-width:1160px}
+
+/* DOCUMENT */
+.doc{flex:1;min-width:0;background:#fff;box-shadow:0 8px 40px rgba(0,0,0,.22);border-radius:4px;overflow:hidden}
+.doc-header{background:var(--hbg);color:#fff;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:16px;padding:12px 20px}
+.logo-box{background:#fff;padding:6px 11px;border-radius:4px}
+.logo-text{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:24px;color:var(--dark);letter-spacing:-1px}
+.logo-text span{color:var(--orange)}
+.header-info{font-size:10.5px;line-height:1.6;color:#ccc}
+.header-info strong{color:#fff;font-size:11px;font-weight:700}
+.doc-title{background:var(--orange);text-align:center;padding:7px;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;letter-spacing:3px;color:#fff;text-transform:uppercase}
+.two-col{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid var(--border)}
+.section{padding:10px 14px}
+.section+.section{border-left:2px solid var(--border)}
+.slabel{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);background:#fff8f5;border-bottom:1.5px solid #f0d0c0;margin:-10px -14px 9px -14px;padding:5px 14px}
+.fr{display:flex;align-items:baseline;margin-bottom:5px;gap:5px}
+.fl{font-size:9.5px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.3px;white-space:nowrap;min-width:85px}
+.fv{flex:1;font-size:11.5px;font-weight:600;color:var(--dark);border:none;border-bottom:1.5px dashed var(--border);background:transparent;padding:1px 4px;font-family:'Barlow',sans-serif;width:100%;outline:none;transition:border-color .2s,background .2s}
+.fv:focus{border-bottom-color:var(--orange);background:#fff8f5;border-radius:2px 2px 0 0}
+.fv.big{font-size:16px;font-weight:800;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;border-bottom:2px solid var(--border)}
+.fv.big:focus{border-bottom-color:var(--orange)}
+.cb{border-bottom:1px solid #eee;padding-bottom:6px;margin-bottom:6px}
+.cb:last-child{border-bottom:none;margin-bottom:0}
+.ct{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;margin-bottom:4px}
+.bot-row{display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--border)}
+.sig{border-bottom:1.5px solid var(--dark);height:24px;width:150px;margin-top:6px}
+.obs-sec{border-top:1.5px solid var(--border);padding:7px 14px;background:#fafafa}
+.obs-inp{width:100%;border:none;background:transparent;font-family:'Barlow',sans-serif;font-size:11.5px;font-weight:600;color:var(--dark);border-bottom:1.5px dashed var(--border);outline:none;padding:1px 4px;margin-top:2px;transition:border-color .2s}
+.obs-inp:focus{border-bottom-color:var(--orange)}
+
+/* HISTORY PANEL */
+.hp{width:300px;flex-shrink:0;background:#fff;border-radius:6px;box-shadow:0 8px 32px rgba(0,0,0,.18);overflow:hidden;display:flex;flex-direction:column;max-height:92vh;position:sticky;top:20px}
+.hh{background:var(--dark);color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.hh h2{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.hc{background:var(--orange);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px;min-width:24px;text-align:center}
+.hs{padding:9px 12px;border-bottom:1px solid #eee;background:#fafafa}
+.hs input{width:100%;border:1.5px solid #ddd;border-radius:4px;padding:5px 9px;font-family:'Barlow',sans-serif;font-size:11.5px;outline:none;transition:border-color .2s}
+.hs input:focus{border-color:var(--orange)}
+.hl{overflow-y:auto;flex:1}
+.he{padding:28px 14px;text-align:center;color:#bbb;font-size:12px;line-height:1.8}
+.he .icon{font-size:30px;display:block;margin-bottom:8px}
+.hi{border-bottom:1px solid #f0f0f0;padding:10px 13px;cursor:pointer;transition:background .15s}
+.hi:hover{background:#fff8f5}
+.hi-top{display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin-bottom:4px}
+.hi-mot{font-size:12px;font-weight:700;color:var(--dark);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hi-dt{font-size:10px;color:#aaa;white-space:nowrap;text-align:right;line-height:1.4}
+.hi-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:4px}
+.tag{font-size:9.5px;font-weight:700;letter-spacing:.4px;background:#f0f0f0;color:#666;border-radius:3px;padding:2px 6px}
+.tag.o{background:#fff0e8;color:var(--orange)}
+.hi-route{font-size:10px;color:#888;margin-bottom:8px}
+.hi-route strong{color:var(--mid)}
+.hi-acts{display:flex;gap:5px;flex-wrap:wrap}
+
+/* history buttons */
+.hbtn{font-size:10.5px;font-weight:700;padding:5px 11px;border-radius:4px;border:none;cursor:pointer;font-family:'Barlow',sans-serif;transition:background .15s,transform .1s;white-space:nowrap}
+.hbtn:hover{transform:translateY(-1px)}
+.hbtn:active{transform:translateY(0)}
+.hbtn-l{background:var(--orange);color:#fff}
+.hbtn-l:hover{background:#c94f00}
+.hbtn-dup{background:#1e3a5f;color:#90c4ff}
+.hbtn-dup:hover{background:#162d4a;color:#b8d9ff}
+.hbtn-dup.ok{background:#145e2e !important;color:#6ee7a0 !important}
+.hbtn-d{background:#f0f0f0;color:#aaa;border:1px solid #e0e0e0}
+.hbtn-d:hover{background:#ffe0e0;color:#c00;border-color:#ffc0c0}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--dark);color:#fff;padding:10px 22px;border-radius:6px;font-size:13px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:transform .3s ease;z-index:999;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.green{background:#2a9d4f}
+
+/* PRINT - força uma página só */
+@media print{
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+  @page{size:A4 portrait;margin:6mm}
+  html,body{margin:0 !important;padding:0 !important;background:white !important}
+  .toolbar,.hp{display:none !important}
+  .main-wrap{display:block !important;width:100% !important}
+  .doc{
+    box-shadow:none !important;border-radius:0 !important;
+    width:100% !important;
+    /* escala para caber em 1 página A4 */
+    zoom:0.78;
+  }
+  .doc-header{padding:8px 14px !important}
+  .logo-text{font-size:20px !important}
+  .header-info{font-size:9px !important;line-height:1.45 !important}
+  .doc-title{font-size:14px !important;padding:5px !important;letter-spacing:2px !important}
+  .section{padding:7px 11px !important}
+  .slabel{font-size:8.5px !important;padding:4px 11px !important;margin:-7px -11px 7px -11px !important}
+  .fr{margin-bottom:3px !important}
+  .fl{font-size:8.5px !important;min-width:78px !important}
+  .fv{font-size:10px !important;padding:0 3px !important;border-bottom-style:solid !important}
+  .fv.big{font-size:13px !important}
+  .cb{padding-bottom:4px !important;margin-bottom:4px !important}
+  .ct{font-size:7.5px !important;margin-bottom:3px !important}
+  .sig{height:18px !important;width:130px !important}
+  .obs-sec{padding:5px 11px !important}
+  .obs-inp{font-size:10px !important}
+}
+
+@media(max-width:900px){
+  .main-wrap{flex-direction:column}
+  .hp{width:100%;max-height:380px;position:static}
+  .two-col,.bot-row{grid-template-columns:1fr}
+  .section+.section{border-left:none;border-top:2px solid var(--border)}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span>✏️ Campos editáveis</span>
+  <button class="btn btn-green" onclick="salvar()">💾 Salvar no Histórico</button>
+  <button class="btn" onclick="window.print()">🖨️ Imprimir / PDF</button>
+  <button class="btn btn-outline" onclick="nova()">➕ Nova Ordem</button>
+</div>
+
+<div class="main-wrap">
+
+<!-- DOCUMENTO -->
+<div class="doc" id="doc">
+  <div class="doc-header">
+    <div class="logo-box"><div class="logo-text">m<span>o</span>tz</div></div>
+    <div class="header-info">
+      <strong>FILIAL AGENCIA PIANETTO TRANSPORTES (GO)</strong><br>
+      CNPJ: 35825580000645 &nbsp;·&nbsp; IE: 109013204 &nbsp;·&nbsp;
+      ROD BR 060, S/N – ZONA RURAL &nbsp;·&nbsp; CEP: 75.945-000 · EDEALINA-GO &nbsp;·&nbsp; Fone: (41) 3247-2774
+    </div>
+  </div>
+
+  <div class="doc-title">Ordem de Carregamento</div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="slabel">Dados da Carga</div>
+      <div class="fr"><span class="fl">Transportadora:</span><input class="fv" data-f="transportadora" value="MOTZ TRANSPORTES LTDA"></div>
+      <div class="fr"><span class="fl">CNPJ:</span><input class="fv" data-f="cnpj" value="35.825.580/0006-45"></div>
+      <div class="fr"><span class="fl">Data:</span><input class="fv" data-f="data" value="26/03/26"></div>
+      <div class="fr"><span class="fl">Carregamento:</span><input class="fv" data-f="carregamento" value="BAUTEK"></div>
+      <div class="fr"><span class="fl">Cidade Origem:</span><input class="fv" data-f="origem" value="BARRO ALTO-GO"></div>
+      <div class="fr"><span class="fl">Descarga:</span><input class="fv" data-f="descarga" value="SUZANO-SP"></div>
+      <div class="fr"><span class="fl">Cidade Destino:</span><input class="fv" data-f="destino" value="LUZIÂNIA-GO"></div>
+      <div class="fr"><span class="fl">Cliente:</span><input class="fv" data-f="cliente" value="BAUMINAS"></div>
+    </div>
+    <div class="section">
+      <div class="slabel">Cavalo ou Truck</div>
+      <div class="fr"><span class="fl">Placa Cavalo:</span><input class="fv big" data-f="placaCavalo" value="SXJ4G99"></div>
+      <div class="fr"><span class="fl">Renavam:</span><input class="fv" data-f="renavamCavalo" value=""></div>
+      <div class="fr"><span class="fl">UF:</span><input class="fv" data-f="ufCavalo" value=""></div>
+      <div class="fr"><span class="fl">Marca/Modelo:</span><input class="fv" data-f="modeloCavalo" value=""></div>
+      <div class="fr"><span class="fl">Qtd Eixos:</span><input class="fv" data-f="eixos" value=""></div>
+      <div class="fr"><span class="fl">Tipo Carroceria:</span><input class="fv" data-f="carroceriaCavalo" value=""></div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="slabel">Motorista</div>
+      <div class="fr"><span class="fl">Motorista:</span><input class="fv" data-f="motorista" value="VERLEI LOURENCO GOMES"></div>
+      <div class="fr"><span class="fl">CPF:</span><input class="fv" data-f="cpf" value="072.947.129-21"></div>
+      <div class="fr"><span class="fl">CNH:</span><input class="fv" data-f="cnh" value="6328961677"></div>
+      <div class="fr"><span class="fl">RG:</span><input class="fv" data-f="rg" value="5579315"></div>
+      <div style="margin-top:9px;border-top:1px solid #eee;padding-top:8px">
+        <div class="slabel" style="margin:-8px -14px 8px -14px;font-size:9px">Autorização de Embarque</div>
+        <div class="fr"><span class="fl">Pedido:</span><input class="fv" data-f="pedido" value=""></div>
+      </div>
+      <div class="obs-sec" style="margin:8px -14px -10px -14px">
+        <span class="fl" style="font-size:9px;color:#999">OBS:</span>
+        <input class="obs-inp" data-f="obs" value="PODE REMONTAR">
+      </div>
+    </div>
+    <div class="section">
+      <div class="slabel">Carretas</div>
+      <div class="cb">
+        <div class="ct">Carreta 1</div>
+        <div class="fr"><span class="fl">Placa:</span><input class="fv big" data-f="placa1" value="SXN2E17"></div>
+        <div class="fr"><span class="fl">Renavam:</span><input class="fv" data-f="renavam1" value=""></div>
+        <div class="fr"><span class="fl">UF:</span><input class="fv" data-f="uf1" value=""></div>
+        <div class="fr"><span class="fl">Marca/Modelo:</span><input class="fv" data-f="modelo1" value=""></div>
+        <div class="fr"><span class="fl">Tipo Carroceria:</span><input class="fv" data-f="carroceria1" value=""></div>
+      </div>
+      <div class="cb">
+        <div class="ct">Carreta 2</div>
+        <div class="fr"><span class="fl">Placa:</span><input class="fv big" data-f="placa2" value=""></div>
+        <div class="fr"><span class="fl">Renavam:</span><input class="fv" data-f="renavam2" value=""></div>
+        <div class="fr"><span class="fl">UF:</span><input class="fv" data-f="uf2" value=""></div>
+        <div class="fr"><span class="fl">Marca/Modelo:</span><input class="fv" data-f="modelo2" value=""></div>
+        <div class="fr"><span class="fl">Tipo Carroceria:</span><input class="fv" data-f="carroceria2" value=""></div>
+      </div>
+      <div class="cb">
+        <div class="ct">Carreta 3</div>
+        <div class="fr"><span class="fl">Placa:</span><input class="fv big" data-f="placa3" value=""></div>
+        <div class="fr"><span class="fl">Renavam:</span><input class="fv" data-f="renavam3" value=""></div>
+        <div class="fr"><span class="fl">UF:</span><input class="fv" data-f="uf3" value=""></div>
+        <div class="fr"><span class="fl">Marca/Modelo:</span><input class="fv" data-f="modelo3" value=""></div>
+        <div class="fr"><span class="fl">Tipo Carroceria:</span><input class="fv" data-f="carroceria3" value=""></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot-row">
+    <div class="section">
+      <div class="slabel">Supervisor de Transportes</div>
+      <span class="fl" style="font-size:9px;color:#999;display:block;margin:5px 0 3px">Assinatura:</span>
+      <div class="sig"></div>
+    </div>
+    <div class="section">
+      <div class="slabel">Produto</div>
+      <div class="fr"><span class="fl">Produto:</span><input class="fv" data-f="produto" value="HIDRAX BAN 55"></div>
+      <div class="fr"><span class="fl">Tipo:</span><input class="fv" data-f="tipo" value="BIG BAG"></div>
+      <div class="fr"><span class="fl">Peso Bruto:</span><input class="fv" data-f="pesoBruto" value=""></div>
+      <div class="fr"><span class="fl">Peso Líquido:</span><input class="fv big" data-f="pesoLiquido" value="40.000"></div>
+    </div>
+  </div>
+</div><!-- /doc -->
+
+<!-- HISTÓRICO -->
+<div class="hp">
+  <div class="hh">
+    <h2>📋 Histórico</h2>
+    <span class="hc" id="hct">0</span>
+  </div>
+  <div class="hs">
+    <input type="text" id="srch" placeholder="🔍 Motorista, placa, rota…" oninput="render()">
+  </div>
+  <div class="hl" id="hlist">
+    <div class="he"><span class="icon">📂</span>Nenhuma ordem salva ainda.<br>Preencha e clique em<br><strong>"Salvar no Histórico"</strong>.</div>
+  </div>
+</div>
+
+</div><!-- /main-wrap -->
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY = 'ordens_hist';
+let hist = [];
+
+async function load() {
+  try { const r = await window.storage.get(KEY); if (r && r.value) hist = JSON.parse(r.value); }
+  catch(e) { try { const s = localStorage.getItem(KEY); if (s) hist = JSON.parse(s); } catch(_){} }
+  render();
+}
+
+async function persist() {
+  const raw = JSON.stringify(hist);
+  try { await window.storage.set(KEY, raw); } catch(e) {}
+  try { localStorage.setItem(KEY, raw); } catch(e) {}
+}
+
+function read() {
+  const d = {};
+  document.querySelectorAll('[data-f]').forEach(el => d[el.dataset.f] = el.value.trim());
+  return d;
+}
+
+function fill(d) {
+  document.querySelectorAll('[data-f]').forEach(el => el.value = d[el.dataset.f] || '');
+}
+
+async function salvar() {
+  const d = read();
+  hist.unshift({ id: Date.now(), motorista: d.motorista || 'Sem nome', dt: new Date().toLocaleString('pt-BR'), d });
+  await persist(); render(); toast('✅ Ordem salva!', 1);
+}
+
+function carregar(id) {
+  const item = hist.find(h => h.id === id); if (!item) return;
+  fill(item.d); toast('📂 Ordem carregada!', 1);
+  document.getElementById('doc').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function duplicar(id, btn) {
+  const item = hist.find(h => h.id === id); if (!item) return;
+  fill(item.d);
+  btn.classList.add('ok'); btn.textContent = '✅ Copiado!';
+  setTimeout(() => { btn.classList.remove('ok'); btn.textContent = '\u29c9 Duplicar'; }, 2000);
+  toast('📋 Dados duplicados no formulário!', 1);
+  document.getElementById('doc').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+async function deletar(id, e) {
+  e.stopPropagation();
+  if (!confirm('Remover esta ordem do histórico?')) return;
+  hist = hist.filter(h => h.id !== id); await persist(); render(); toast('🗑️ Removido.', 0);
+}
+
+function nova() {
+  if (!confirm('Limpar o formulário para nova ordem?')) return;
+  document.querySelectorAll('[data-f]').forEach(el => el.value = '');
+  toast('➕ Nova ordem iniciada.', 1);
+}
+
+function render() {
+  const list = document.getElementById('hlist');
+  const ct   = document.getElementById('hct');
+  const q    = (document.getElementById('srch').value || '').toLowerCase();
+  const fil  = hist.filter(h => {
+    if (!q) return true;
+    const d = h.d;
+    return [h.motorista, d.placaCavalo, d.placa1, d.origem, d.destino, d.descarga, d.cliente, d.produto]
+      .some(v => v && v.toLowerCase().includes(q));
+  });
+  ct.textContent = hist.length;
+  if (!fil.length) {
+    list.innerHTML = `<div class="he"><span class="icon">${q ? '🔎' : '📂'}</span>${
+      q ? 'Nenhum resultado para<br><strong>"' + q + '"</strong>'
+        : 'Nenhuma ordem salva ainda.<br>Preencha e clique em<br><strong>"Salvar no Histórico"</strong>.'
+    }</div>`;
+    return;
+  }
+  list.innerHTML = fil.map(h => {
+    const d = h.d, id = h.id;
+    const rota = [d.origem, d.descarga || d.destino].filter(Boolean).join(' → ') || '—';
+    return `<div class="hi" onclick="carregar(${id})">
+      <div class="hi-top">
+        <span class="hi-mot" title="${h.motorista}">${h.motorista}</span>
+        <span class="hi-dt">${h.dt}</span>
+      </div>
+      <div class="hi-tags">
+        ${d.placaCavalo ? `<span class="tag o">${d.placaCavalo}</span>` : ''}
+        ${d.placa1      ? `<span class="tag">${d.placa1}</span>`       : ''}
+        ${d.produto     ? `<span class="tag">${d.produto}</span>`      : ''}
+        ${d.cliente     ? `<span class="tag">${d.cliente}</span>`      : ''}
+      </div>
+      <div class="hi-route"><strong>Rota:</strong> ${rota}</div>
+      <div class="hi-acts">
+        <button class="hbtn hbtn-l"   onclick="carregar(${id});event.stopPropagation()">📂 Carregar</button>
+        <button class="hbtn hbtn-dup" onclick="event.stopPropagation();duplicar(${id},this)">\u29c9 Duplicar</button>
+        <button class="hbtn hbtn-d"   onclick="deletar(${id},event)">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toast(msg, green) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast' + (green ? ' green' : '') + ' show';
+  setTimeout(() => { t.className = 'toast' + (green ? ' green' : ''); }, 2600);
+}
+
+load();
+</script>
+</body>
+</html>

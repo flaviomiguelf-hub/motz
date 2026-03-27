@@ -451,18 +451,29 @@ body {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-const KEY = 'ordens_hist';
+const SHEETDB = 'https://sheetdb.io/api/v1/zu0vf31sk92fq';
 let hist = [];
 
 async function load() {
-  try { const r = await window.storage.get(KEY); if (r && r.value) hist = JSON.parse(r.value); }
-  catch(e) { try { const s = localStorage.getItem(KEY); if (s) hist = JSON.parse(s); } catch(_){} }
+  try {
+    toast('🔄 Carregando ordens…', 1);
+    const r = await fetch(SHEETDB);
+    const rows = await r.json();
+    hist = rows.map(row => ({
+      id: row.id,
+      motorista: row.motorista,
+      dt: row.dt,
+      d: typeof row.dados === 'string' ? JSON.parse(row.dados) : row.dados
+    })).filter(h => h.id);
+  } catch(e) {
+    console.error('Erro ao carregar:', e);
+    hist = [];
+  }
   render();
 }
+
 async function persist() {
-  const raw = JSON.stringify(hist);
-  try { await window.storage.set(KEY, raw); } catch(e) {}
-  try { localStorage.setItem(KEY, raw); } catch(e) {}
+  // not used directly — save/delete handle individually
 }
 function read() {
   const d = {};
@@ -474,8 +485,27 @@ function fill(d) {
 }
 async function salvar() {
   const d = read();
-  hist.unshift({ id: Date.now(), motorista: d.motorista || 'Sem nome', dt: new Date().toLocaleString('pt-BR'), d });
-  await persist(); render(); toast('✅ Salvo!', 1);
+  const registro = {
+    id: Date.now().toString(),
+    motorista: d.motorista || 'Sem nome',
+    dt: new Date().toLocaleString('pt-BR'),
+    dados: JSON.stringify(d)
+  };
+  try {
+    toast('💾 Salvando…', 1);
+    const r = await fetch(SHEETDB, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: registro })
+    });
+    if (!r.ok) throw new Error('Erro HTTP ' + r.status);
+    hist.unshift({ id: registro.id, motorista: registro.motorista, dt: registro.dt, d });
+    render();
+    toast('✅ Salvo e compartilhado!', 1);
+  } catch(e) {
+    console.error(e);
+    toast('❌ Erro ao salvar. Verifique conexão.', 0);
+  }
 }
 function carregar(id) {
   const item = hist.find(h => h.id === id); if (!item) return;
@@ -492,8 +522,17 @@ function duplicar(id, btn) {
 }
 async function deletar(id, e) {
   e.stopPropagation();
-  if (!confirm('Remover esta ordem?')) return;
-  hist = hist.filter(h => h.id !== id); await persist(); render(); toast('🗑️ Removido.', 0);
+  if (!confirm('Remover esta ordem? Ela será removida para todos.')) return;
+  try {
+    const r = await fetch(SHEETDB + '/id/' + id, { method: 'DELETE' });
+    if (!r.ok) throw new Error('Erro HTTP ' + r.status);
+    hist = hist.filter(h => h.id !== id);
+    render();
+    toast('🗑️ Removido.', 0);
+  } catch(e) {
+    console.error(e);
+    toast('❌ Erro ao remover.', 0);
+  }
 }
 function nova() {
   if (!confirm('Limpar formulário?')) return;

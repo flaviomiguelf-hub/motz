@@ -2,255 +2,453 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ordem de Carregamento - MOTZ TRANSPORTES</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ordem de Carregamento – MOTZ</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&family=Barlow+Condensed:wght@400;600;700&display=swap');
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--orange:#e85d04;--dark:#1a1a1a;--mid:#444;--border:#ccc;--hbg:#2c2c2c}
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;700&display=swap');
 
-body{background:#d5d5d0;font-family:'Barlow',sans-serif;display:flex;flex-direction:column;align-items:center;padding:24px 10px 60px;min-height:100vh}
-.toolbar{background:var(--dark);color:#fff;padding:10px 18px;border-radius:8px;margin-bottom:18px;display:flex;gap:10px;align-items:center;font-size:13px;box-shadow:0 4px 16px rgba(0,0,0,.3);flex-wrap:wrap;width:100%;max-width:1160px}
-.toolbar span{color:#aaa;font-size:12px}
-.btn{background:var(--orange);color:#fff;border:none;padding:8px 16px;border-radius:5px;cursor:pointer;font-family:'Barlow',sans-serif;font-weight:700;font-size:12px;letter-spacing:.4px;transition:background .2s,transform .1s;white-space:nowrap}
-.btn:hover{background:#c94f00;transform:translateY(-1px)}
-.btn-outline{background:transparent;border:1.5px solid #555;color:#ccc}
-.btn-outline:hover{background:#2a2a2a;border-color:#888}
-.btn-green{background:#2a9d4f}
-.btn-green:hover{background:#228840}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-.main-wrap{display:flex;gap:20px;align-items:flex-start;width:100%;max-width:1160px}
-
-/* DOCUMENT */
-.doc{flex:1;min-width:0;background:#fff;box-shadow:0 8px 40px rgba(0,0,0,.22);border-radius:4px;overflow:hidden}
-.doc-header{background:var(--hbg);color:#fff;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:16px;padding:12px 20px}
-.logo-box{background:#fff;padding:6px 11px;border-radius:4px}
-.logo-text{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:24px;color:var(--dark);letter-spacing:-1px}
-.logo-text span{color:var(--orange)}
-.header-info{font-size:10.5px;line-height:1.6;color:#ccc}
-.header-info strong{color:#fff;font-size:11px;font-weight:700}
-.doc-title{background:var(--orange);text-align:center;padding:7px;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;letter-spacing:3px;color:#fff;text-transform:uppercase}
-.two-col{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid var(--border)}
-.section{padding:10px 14px}
-.section+.section{border-left:2px solid var(--border)}
-.slabel{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);background:#fff8f5;border-bottom:1.5px solid #f0d0c0;margin:-10px -14px 9px -14px;padding:5px 14px}
-.fr{display:flex;align-items:baseline;margin-bottom:5px;gap:5px}
-.fl{font-size:9.5px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.3px;white-space:nowrap;min-width:85px}
-.fv{flex:1;font-size:11.5px;font-weight:600;color:var(--dark);border:none;border-bottom:1.5px dashed var(--border);background:transparent;padding:1px 4px;font-family:'Barlow',sans-serif;width:100%;outline:none;transition:border-color .2s,background .2s}
-.fv:focus{border-bottom-color:var(--orange);background:#fff8f5;border-radius:2px 2px 0 0}
-.fv.big{font-size:16px;font-weight:800;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;border-bottom:2px solid var(--border)}
-.fv.big:focus{border-bottom-color:var(--orange)}
-.cb{border-bottom:1px solid #eee;padding-bottom:6px;margin-bottom:6px}
-.cb:last-child{border-bottom:none;margin-bottom:0}
-.ct{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;margin-bottom:4px}
-.bot-row{display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--border)}
-.sig{border-bottom:1.5px solid var(--dark);height:24px;width:150px;margin-top:6px}
-.obs-sec{border-top:1.5px solid var(--border);padding:7px 14px;background:#fafafa}
-.obs-inp{width:100%;border:none;background:transparent;font-family:'Barlow',sans-serif;font-size:11.5px;font-weight:600;color:var(--dark);border-bottom:1.5px dashed var(--border);outline:none;padding:1px 4px;margin-top:2px;transition:border-color .2s}
-.obs-inp:focus{border-bottom-color:var(--orange)}
-
-/* HISTORY PANEL */
-.hp{width:300px;flex-shrink:0;background:#fff;border-radius:6px;box-shadow:0 8px 32px rgba(0,0,0,.18);overflow:hidden;display:flex;flex-direction:column;max-height:92vh;position:sticky;top:20px}
-.hh{background:var(--dark);color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px}
-.hh h2{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-.hc{background:var(--orange);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px;min-width:24px;text-align:center}
-.hs{padding:9px 12px;border-bottom:1px solid #eee;background:#fafafa}
-.hs input{width:100%;border:1.5px solid #ddd;border-radius:4px;padding:5px 9px;font-family:'Barlow',sans-serif;font-size:11.5px;outline:none;transition:border-color .2s}
-.hs input:focus{border-color:var(--orange)}
-.hl{overflow-y:auto;flex:1}
-.he{padding:28px 14px;text-align:center;color:#bbb;font-size:12px;line-height:1.8}
-.he .icon{font-size:30px;display:block;margin-bottom:8px}
-.hi{border-bottom:1px solid #f0f0f0;padding:10px 13px;cursor:pointer;transition:background .15s}
-.hi:hover{background:#fff8f5}
-.hi-top{display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin-bottom:4px}
-.hi-mot{font-size:12px;font-weight:700;color:var(--dark);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hi-dt{font-size:10px;color:#aaa;white-space:nowrap;text-align:right;line-height:1.4}
-.hi-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:4px}
-.tag{font-size:9.5px;font-weight:700;letter-spacing:.4px;background:#f0f0f0;color:#666;border-radius:3px;padding:2px 6px}
-.tag.o{background:#fff0e8;color:var(--orange)}
-.hi-route{font-size:10px;color:#888;margin-bottom:8px}
-.hi-route strong{color:var(--mid)}
-.hi-acts{display:flex;gap:5px;flex-wrap:wrap}
-
-/* history buttons */
-.hbtn{font-size:10.5px;font-weight:700;padding:5px 11px;border-radius:4px;border:none;cursor:pointer;font-family:'Barlow',sans-serif;transition:background .15s,transform .1s;white-space:nowrap}
-.hbtn:hover{transform:translateY(-1px)}
-.hbtn:active{transform:translateY(0)}
-.hbtn-l{background:var(--orange);color:#fff}
-.hbtn-l:hover{background:#c94f00}
-.hbtn-dup{background:#1e3a5f;color:#90c4ff}
-.hbtn-dup:hover{background:#162d4a;color:#b8d9ff}
-.hbtn-dup.ok{background:#145e2e !important;color:#6ee7a0 !important}
-.hbtn-d{background:#f0f0f0;color:#aaa;border:1px solid #e0e0e0}
-.hbtn-d:hover{background:#ffe0e0;color:#c00;border-color:#ffc0c0}
-
-/* TOAST */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--dark);color:#fff;padding:10px 22px;border-radius:6px;font-size:13px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:transform .3s ease;z-index:999;white-space:nowrap}
-.toast.show{transform:translateX(-50%) translateY(0)}
-.toast.green{background:#2a9d4f}
-
-/* PRINT - força uma página só */
-@media print{
-  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
-  @page{size:A4 portrait;margin:6mm}
-  html,body{margin:0 !important;padding:0 !important;background:white !important}
-  .toolbar,.hp{display:none !important}
-  .main-wrap{display:block !important;width:100% !important}
-  .doc{
-    box-shadow:none !important;border-radius:0 !important;
-    width:100% !important;
-    /* escala para caber em 1 página A4 */
-    zoom:0.78;
-  }
-  .doc-header{padding:8px 14px !important}
-  .logo-text{font-size:20px !important}
-  .header-info{font-size:9px !important;line-height:1.45 !important}
-  .doc-title{font-size:14px !important;padding:5px !important;letter-spacing:2px !important}
-  .section{padding:7px 11px !important}
-  .slabel{font-size:8.5px !important;padding:4px 11px !important;margin:-7px -11px 7px -11px !important}
-  .fr{margin-bottom:3px !important}
-  .fl{font-size:8.5px !important;min-width:78px !important}
-  .fv{font-size:10px !important;padding:0 3px !important;border-bottom-style:solid !important}
-  .fv.big{font-size:13px !important}
-  .cb{padding-bottom:4px !important;margin-bottom:4px !important}
-  .ct{font-size:7.5px !important;margin-bottom:3px !important}
-  .sig{height:18px !important;width:130px !important}
-  .obs-sec{padding:5px 11px !important}
-  .obs-inp{font-size:10px !important}
+:root {
+  --or: #d95000;
+  --dk: #111;
+  --md: #444;
+  --lt: #f7f7f5;
+  --bd: #bbb;
+  --bd2: #333;
+  --bg: #c8c8c4;
 }
 
-@media(max-width:900px){
-  .main-wrap{flex-direction:column}
-  .hp{width:100%;max-height:380px;position:static}
-  .two-col,.bot-row{grid-template-columns:1fr}
-  .section+.section{border-left:none;border-top:2px solid var(--border)}
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px 50px;
+  min-height: 100vh;
 }
+
+/* ── TOOLBAR ── */
+.tb {
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+  background: var(--dk); color: #fff;
+  padding: 8px 14px; border-radius: 4px;
+  margin-bottom: 16px; width: 100%; max-width: 1120px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.35);
+}
+.tb span { color: #666; font-size: 11px; }
+.btn {
+  border: none; cursor: pointer; font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 700; font-size: 11px; padding: 6px 13px;
+  border-radius: 3px; transition: filter .15s, transform .1s; white-space: nowrap;
+}
+.btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.b-save  { background: #1a6b38; color: #fff; }
+.b-print { background: var(--or); color: #fff; }
+.b-new   { background: transparent; border: 1px solid #444; color: #aaa; }
+.b-new:hover { background: #222; }
+
+/* ── WRAP ── */
+.wrap { display: flex; gap: 16px; align-items: flex-start; width: 100%; max-width: 1120px; }
+
+/* ── DOCUMENT ── */
+.doc {
+  flex: 1; min-width: 0;
+  background: #fff;
+  border: 2px solid var(--dk);
+  box-shadow: 4px 4px 0 var(--dk);
+}
+
+/* header strip */
+.dh {
+  background: var(--dk); color: #fff;
+  display: grid; grid-template-columns: auto 1fr;
+  align-items: center; gap: 14px;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--dk);
+}
+.logo {
+  background: #fff; padding: 4px 10px; border-radius: 2px;
+  font-family: 'IBM Plex Mono', monospace; font-weight: 700;
+  font-size: 20px; color: var(--dk); letter-spacing: -1px;
+}
+.logo em { color: var(--or); font-style: normal; }
+.hi-info { font-size: 9.5px; line-height: 1.55; color: #888; }
+.hi-info strong { color: #ddd; font-size: 10px; }
+
+/* title bar */
+.dt {
+  background: var(--or); color: #fff;
+  text-align: center; padding: 5px 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  border-bottom: 2px solid var(--dk);
+}
+
+/* ── GRID BODY ── */
+/* All sections share a strict bordered-cell aesthetic */
+.grid {
+  display: grid;
+  border-bottom: 2px solid var(--bd);
+}
+.g2  { grid-template-columns: 1fr 1fr; }
+.g3  { grid-template-columns: 1fr 1fr 1fr; }
+.g31 { grid-template-columns: 3fr 1fr; }
+
+.cell {
+  border-right: 1.5px solid var(--bd);
+  border-bottom: 1.5px solid var(--bd);
+  padding: 0;
+  min-height: 0;
+}
+.cell:last-child { border-right: none; }
+.grid:last-child .cell { border-bottom: none; }
+
+/* cell header label */
+.ch {
+  background: #f0f0ec;
+  border-bottom: 1px solid var(--bd);
+  padding: 3px 7px;
+  font-size: 8px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--or);
+}
+
+/* field rows inside cells */
+.rows { padding: 4px 0 3px; }
+
+.row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  align-items: center;
+  border-bottom: 1px solid #f0f0ee;
+  min-height: 22px;
+}
+.row:last-child { border-bottom: none; }
+
+.rl {
+  padding: 2px 7px;
+  font-size: 8.5px; font-weight: 600;
+  color: #888; text-transform: uppercase; letter-spacing: .3px;
+  border-right: 1px solid #eee;
+  white-space: nowrap; overflow: hidden;
+}
+
+.rv {
+  padding: 0 6px;
+  font-size: 11px; font-weight: 600;
+  color: var(--dk);
+  border: none; background: transparent;
+  font-family: 'IBM Plex Sans', sans-serif;
+  width: 100%; outline: none;
+  transition: background .15s;
+  height: 22px;
+}
+.rv:focus { background: #fff8f2; }
+.rv.mono {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px; font-weight: 700;
+  color: var(--dk); letter-spacing: .5px;
+}
+.rv.lg {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px; font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* special: obs row full width */
+.obs-row {
+  border-top: 1px solid var(--bd);
+  display: grid; grid-template-columns: 38px 1fr;
+  align-items: center; min-height: 22px;
+}
+.obs-row .rl { font-size: 8px; }
+
+/* sig line */
+.sig-cell { padding: 6px 12px 8px; }
+.sig-wrap { position:relative; margin-top:4px; border:1.5px solid var(--bd); border-radius:2px; background:#fafaf8; }
+.sig-wrap canvas { display:block; width:100%; height:68px; cursor:crosshair; touch-action:none; }
+.sig-wrap:focus-within { border-color:var(--or); }
+.sig-hint { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:10px; color:#ccc; font-weight:500; pointer-events:none; white-space:nowrap; }
+.sig-acts { display:flex; gap:5px; margin-top:4px; }
+.sig-btn { font-size:9px; font-weight:700; padding:2px 8px; border:1px solid #ddd; border-radius:2px; background:#f0f0ee; color:#777; cursor:pointer; font-family:'IBM Plex Sans',sans-serif; transition:background .12s; }
+.sig-btn:hover { background:#e0e0dc; }
+.sig-btn.clr { border-color:#f5c0a8; background:#fff0e8; color:var(--or); }
+.sig-btn.clr:hover { background:#fde0cc; }
+
+/* section divider label (full-width strip) */
+.sec-div {
+  grid-column: 1 / -1;
+  background: var(--dk); color: #fff;
+  padding: 3px 10px;
+  font-size: 8px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  border-bottom: 1.5px solid var(--bd);
+}
+
+/* ── HISTORY ── */
+.hp {
+  width: 270px; flex-shrink: 0;
+  border: 2px solid var(--dk);
+  box-shadow: 4px 4px 0 var(--dk);
+  background: #fff;
+  display: flex; flex-direction: column;
+  max-height: 92vh; position: sticky; top: 20px;
+  overflow: hidden;
+}
+.hh {
+  background: var(--dk); color: #fff;
+  padding: 9px 12px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 2px solid var(--dk);
+}
+.hh h2 { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+.hc { background: var(--or); color: #fff; font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 2px; min-width: 20px; text-align: center; }
+.hs { padding: 8px 10px; border-bottom: 1.5px solid var(--bd); background: var(--lt); }
+.hs input {
+  width: 100%; border: 1.5px solid var(--bd); border-radius: 2px;
+  padding: 4px 8px; font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 11px; outline: none; background: #fff;
+  transition: border-color .15s;
+}
+.hs input:focus { border-color: var(--or); }
+.hl { overflow-y: auto; flex: 1; }
+.he { padding: 24px 12px; text-align: center; color: #bbb; font-size: 11px; line-height: 1.8; }
+.he .ico { font-size: 26px; display: block; margin-bottom: 6px; }
+
+/* history card */
+.hcard {
+  border-bottom: 1.5px solid #eee;
+  padding: 8px 10px; cursor: pointer;
+  transition: background .12s;
+}
+.hcard:hover { background: #fff8f2; }
+.hc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 4px; margin-bottom: 4px; }
+.hc-name { font-size: 11px; font-weight: 700; color: var(--dk); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hc-dt { font-size: 9px; color: #aaa; text-align: right; line-height: 1.4; white-space: nowrap; }
+.hc-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 4px; }
+.tag { font-size: 9px; font-weight: 700; letter-spacing: .3px; padding: 1px 5px; border-radius: 2px; }
+.tag-or { background: #fff0e8; color: var(--or); border: 1px solid #f5c9a8; }
+.tag-gr { background: #f0f0f0; color: #555; border: 1px solid #ddd; }
+.hc-route { font-size: 9.5px; color: #777; margin-bottom: 6px; }
+.hc-acts { display: flex; gap: 4px; flex-wrap: wrap; }
+
+/* action buttons in card */
+.ab {
+  font-size: 9.5px; font-weight: 700; padding: 3px 9px;
+  border: none; cursor: pointer; border-radius: 2px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  transition: filter .12s, transform .1s; white-space: nowrap;
+}
+.ab:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.ab-load { background: var(--or); color: #fff; }
+.ab-dup  { background: #1e3a5f; color: #90c4ff; }
+.ab-dup.ok { background: #1a6b38 !important; color: #6ee7a0 !important; }
+.ab-del  { background: #eee; color: #aaa; border: 1px solid #ddd; }
+.ab-del:hover { background: #ffe0e0; color: #c00; border-color: #fcc; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 20px; left: 50%;
+  transform: translateX(-50%) translateY(70px);
+  background: var(--dk); color: #fff;
+  padding: 8px 20px; border-radius: 3px;
+  font-size: 12px; font-weight: 600;
+  box-shadow: 3px 3px 0 rgba(0,0,0,.4);
+  transition: transform .25s ease; z-index: 999; white-space: nowrap;
+  border: 1.5px solid #333;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.green { background: #1a6b38; border-color: #0e4024; }
+
+/* ── PRINT ── */
+@media print {
+  *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  @page { size: A4 portrait; margin: 7mm; }
+  html, body { margin: 0 !important; padding: 0 !important; background: white !important; }
+  .tb, .hp, .toast { display: none !important; }
+  .wrap { display: block !important; }
+  .doc { box-shadow: none !important; width: 100% !important; zoom: 0.82; }
+}
+
+@media (max-width: 860px) {
+  .wrap { flex-direction: column; }
+  .hp { width: 100%; max-height: 320px; position: static; }
+  .g2, .g3, .g31 { grid-template-columns: 1fr; }
+  .cell { border-right: none; }
+}
+#pdf-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+#pdf-overlay.show{display:flex}
+#pdf-overlay .pmsg{color:#fff;font-family:"IBM Plex Sans",sans-serif;font-size:14px;font-weight:700;letter-spacing:.5px}
+#pdf-overlay .bwrap{width:240px;height:6px;background:#333;border-radius:3px;overflow:hidden}
+#pdf-overlay .bbar{height:100%;width:0%;background:#d95000;border-radius:3px;transition:width .4s ease}
 </style>
 </head>
 <body>
 
-<div class="toolbar">
-  <span>✏️ Campos editáveis</span>
-  <button class="btn btn-green" onclick="salvar()">💾 Salvar no Histórico</button>
-  <button class="btn" onclick="window.print()">🖨️ Imprimir / PDF</button>
-  <button class="btn btn-outline" onclick="nova()">➕ Nova Ordem</button>
+<div class="tb">
+  <span>✏️ editável</span>
+  <button class="btn b-save"  onclick="salvar()">💾 Salvar</button>
+  <button class="btn b-print" onclick="exportarPDF()">📄 Gerar PDF</button>
+  <button class="btn b-new"   onclick="nova()">➕ Nova Ordem</button>
 </div>
 
-<div class="main-wrap">
+<div class="wrap">
 
-<!-- DOCUMENTO -->
+<!-- ══ DOCUMENTO ══ -->
 <div class="doc" id="doc">
-  <div class="doc-header">
-    <div class="logo-box"><div class="logo-text">m<span>o</span>tz</div></div>
-    <div class="header-info">
+
+  <!-- header -->
+  <div class="dh">
+    <div class="logo">m<em>o</em>tz</div>
+    <div class="hi-info">
       <strong>FILIAL AGENCIA PIANETTO TRANSPORTES (GO)</strong><br>
-      CNPJ: 35825580000645 &nbsp;·&nbsp; IE: 109013204 &nbsp;·&nbsp;
-      ROD BR 060, S/N – ZONA RURAL &nbsp;·&nbsp; CEP: 75.945-000 · EDEALINA-GO &nbsp;·&nbsp; Fone: (41) 3247-2774
+      CNPJ: 35.825.580/0006-45 · IE: 109013204 · ROD BR 060, S/N – ZONA RURAL · CEP: 75.945-000 · EDEALINA-GO · Fone: (41) 3247-2774
     </div>
   </div>
+  <div class="dt">Ordem de Carregamento</div>
 
-  <div class="doc-title">Ordem de Carregamento</div>
-
-  <div class="two-col">
-    <div class="section">
-      <div class="slabel">Dados da Carga</div>
-      <div class="fr"><span class="fl">Transportadora:</span><input class="fv" data-f="transportadora" value="MOTZ TRANSPORTES LTDA"></div>
-      <div class="fr"><span class="fl">CNPJ:</span><input class="fv" data-f="cnpj" value="35.825.580/0006-45"></div>
-      <div class="fr"><span class="fl">Data:</span><input class="fv" data-f="data" value="26/03/26"></div>
-      <div class="fr"><span class="fl">Carregamento:</span><input class="fv" data-f="carregamento" value="BAUTEK"></div>
-      <div class="fr"><span class="fl">Cidade Origem:</span><input class="fv" data-f="origem" value="BARRO ALTO-GO"></div>
-      <div class="fr"><span class="fl">Descarga:</span><input class="fv" data-f="descarga" value="SUZANO-SP"></div>
-      <div class="fr"><span class="fl">Cidade Destino:</span><input class="fv" data-f="destino" value="LUZIÂNIA-GO"></div>
-      <div class="fr"><span class="fl">Cliente:</span><input class="fv" data-f="cliente" value="BAUMINAS"></div>
-    </div>
-    <div class="section">
-      <div class="slabel">Cavalo ou Truck</div>
-      <div class="fr"><span class="fl">Placa Cavalo:</span><input class="fv big" data-f="placaCavalo" value="SXJ4G99"></div>
-      <div class="fr"><span class="fl">Renavam:</span><input class="fv" data-f="renavamCavalo" value=""></div>
-      <div class="fr"><span class="fl">UF:</span><input class="fv" data-f="ufCavalo" value=""></div>
-      <div class="fr"><span class="fl">Marca/Modelo:</span><input class="fv" data-f="modeloCavalo" value=""></div>
-      <div class="fr"><span class="fl">Qtd Eixos:</span><input class="fv" data-f="eixos" value=""></div>
-      <div class="fr"><span class="fl">Tipo Carroceria:</span><input class="fv" data-f="carroceriaCavalo" value=""></div>
-    </div>
-  </div>
-
-  <div class="two-col">
-    <div class="section">
-      <div class="slabel">Motorista</div>
-      <div class="fr"><span class="fl">Motorista:</span><input class="fv" data-f="motorista" value="VERLEI LOURENCO GOMES"></div>
-      <div class="fr"><span class="fl">CPF:</span><input class="fv" data-f="cpf" value="072.947.129-21"></div>
-      <div class="fr"><span class="fl">CNH:</span><input class="fv" data-f="cnh" value="6328961677"></div>
-      <div class="fr"><span class="fl">RG:</span><input class="fv" data-f="rg" value="5579315"></div>
-      <div style="margin-top:9px;border-top:1px solid #eee;padding-top:8px">
-        <div class="slabel" style="margin:-8px -14px 8px -14px;font-size:9px">Autorização de Embarque</div>
-        <div class="fr"><span class="fl">Pedido:</span><input class="fv" data-f="pedido" value=""></div>
-      </div>
-      <div class="obs-sec" style="margin:8px -14px -10px -14px">
-        <span class="fl" style="font-size:9px;color:#999">OBS:</span>
-        <input class="obs-inp" data-f="obs" value="PODE REMONTAR">
+  <!-- ROW 1: transportadora + cavalo -->
+  <div class="grid g2">
+    <div class="cell">
+      <div class="ch">Dados da Carga</div>
+      <div class="rows">
+        <div class="row"><span class="rl">Transportadora</span><input class="rv" data-f="transportadora" value="MOTZ TRANSPORTES LTDA"></div>
+        <div class="row"><span class="rl">CNPJ</span><input class="rv mono" data-f="cnpj" value="35.825.580/0006-45"></div>
+        <div class="row"><span class="rl">Data</span><input class="rv mono" data-f="data" id="campo-data" value=""></div>
+        <div class="row"><span class="rl">Carregamento</span><input class="rv" data-f="carregamento" value="BAUTEK"></div>
+        <div class="row"><span class="rl">Cidade Origem</span><input class="rv" data-f="origem" value="BARRO ALTO-GO"></div>
+        <div class="row"><span class="rl">Descarga</span><input class="rv" data-f="descarga" value="SUZANO-SP"></div>
+        <div class="row"><span class="rl">Cidade Destino</span><input class="rv" data-f="destino" value="LUZIÂNIA-GO"></div>
+        <div class="row"><span class="rl">Cliente</span><input class="rv" data-f="cliente" value="BAUMINAS"></div>
       </div>
     </div>
-    <div class="section">
-      <div class="slabel">Carretas</div>
-      <div class="cb">
-        <div class="ct">Carreta 1</div>
-        <div class="fr"><span class="fl">Placa:</span><input class="fv big" data-f="placa1" value="SXN2E17"></div>
-        <div class="fr"><span class="fl">Renavam:</span><input class="fv" data-f="renavam1" value=""></div>
-        <div class="fr"><span class="fl">UF:</span><input class="fv" data-f="uf1" value=""></div>
-        <div class="fr"><span class="fl">Marca/Modelo:</span><input class="fv" data-f="modelo1" value=""></div>
-        <div class="fr"><span class="fl">Tipo Carroceria:</span><input class="fv" data-f="carroceria1" value=""></div>
-      </div>
-      <div class="cb">
-        <div class="ct">Carreta 2</div>
-        <div class="fr"><span class="fl">Placa:</span><input class="fv big" data-f="placa2" value=""></div>
-        <div class="fr"><span class="fl">Renavam:</span><input class="fv" data-f="renavam2" value=""></div>
-        <div class="fr"><span class="fl">UF:</span><input class="fv" data-f="uf2" value=""></div>
-        <div class="fr"><span class="fl">Marca/Modelo:</span><input class="fv" data-f="modelo2" value=""></div>
-        <div class="fr"><span class="fl">Tipo Carroceria:</span><input class="fv" data-f="carroceria2" value=""></div>
-      </div>
-      <div class="cb">
-        <div class="ct">Carreta 3</div>
-        <div class="fr"><span class="fl">Placa:</span><input class="fv big" data-f="placa3" value=""></div>
-        <div class="fr"><span class="fl">Renavam:</span><input class="fv" data-f="renavam3" value=""></div>
-        <div class="fr"><span class="fl">UF:</span><input class="fv" data-f="uf3" value=""></div>
-        <div class="fr"><span class="fl">Marca/Modelo:</span><input class="fv" data-f="modelo3" value=""></div>
-        <div class="fr"><span class="fl">Tipo Carroceria:</span><input class="fv" data-f="carroceria3" value=""></div>
+    <div class="cell">
+      <div class="ch">Cavalo / Truck</div>
+      <div class="rows">
+        <div class="row"><span class="rl">Placa</span><input class="rv lg" data-f="placaCavalo" value="SXJ4G99"></div>
+        <div class="row"><span class="rl">Renavam</span><input class="rv mono" data-f="renavamCavalo" value=""></div>
+        <div class="row"><span class="rl">UF</span><input class="rv" data-f="ufCavalo" value=""></div>
+        <div class="row"><span class="rl">Marca/Modelo</span><input class="rv" data-f="modeloCavalo" value=""></div>
+        <div class="row"><span class="rl">Qtd Eixos</span><input class="rv" data-f="eixos" value=""></div>
+        <div class="row"><span class="rl">Tipo Carroceria</span><input class="rv" data-f="carroceriaCavalo" value=""></div>
       </div>
     </div>
   </div>
 
-  <div class="bot-row">
-    <div class="section">
-      <div class="slabel">Supervisor de Transportes</div>
-      <span class="fl" style="font-size:9px;color:#999;display:block;margin:5px 0 3px">Assinatura:</span>
-      <div class="sig"></div>
+  <!-- ROW 2: motorista + carretas (3 colunas) -->
+  <div class="grid g2">
+    <div class="cell">
+      <div class="ch">Motorista</div>
+      <div class="rows">
+        <div class="row"><span class="rl">Nome</span><input class="rv" data-f="motorista" value="VERLEI LOURENCO GOMES"></div>
+        <div class="row"><span class="rl">CPF</span><input class="rv mono" data-f="cpf" value="072.947.129-21"></div>
+        <div class="row"><span class="rl">CNH</span><input class="rv mono" data-f="cnh" value="6328961677"></div>
+        <div class="row"><span class="rl">RG</span><input class="rv mono" data-f="rg" value="5579315"></div>
+        <div class="row"><span class="rl">Pedido</span><input class="rv" data-f="pedido" value=""></div>
+      </div>
+      <div class="obs-row">
+        <span class="rl" style="padding:2px 7px;font-size:8px;font-weight:600;color:#888;border-right:1px solid #eee">OBS</span>
+        <input class="rv" data-f="obs" style="font-size:10px" value="PODE REMONTAR">
+      </div>
     </div>
-    <div class="section">
-      <div class="slabel">Produto</div>
-      <div class="fr"><span class="fl">Produto:</span><input class="fv" data-f="produto" value="HIDRAX BAN 55"></div>
-      <div class="fr"><span class="fl">Tipo:</span><input class="fv" data-f="tipo" value="BIG BAG"></div>
-      <div class="fr"><span class="fl">Peso Bruto:</span><input class="fv" data-f="pesoBruto" value=""></div>
-      <div class="fr"><span class="fl">Peso Líquido:</span><input class="fv big" data-f="pesoLiquido" value="40.000"></div>
+
+    <!-- 3 carretas in 3 sub-columns -->
+    <div class="cell" style="padding:0">
+      <div class="ch">Carretas</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;height:calc(100% - 22px)">
+
+        <div style="border-right:1px solid var(--bd)">
+          <div style="background:#f8f8f6;border-bottom:1px solid #eee;padding:2px 6px;font-size:7.5px;font-weight:700;letter-spacing:1px;color:#aaa;text-transform:uppercase">Carreta 1</div>
+          <div class="rows" style="padding:2px 0">
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">Placa</span><input class="rv lg" data-f="placa1" value="SXN2E17"></div>
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">Renavam</span><input class="rv mono" data-f="renavam1" value="" style="font-size:9px"></div>
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">UF</span><input class="rv" data-f="uf1" value=""></div>
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">Modelo</span><input class="rv" data-f="modelo1" value="" style="font-size:10px"></div>
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">Carroceria</span><input class="rv" data-f="carroceria1" value="" style="font-size:10px"></div>
+          </div>
+        </div>
+
+        <div style="border-right:1px solid var(--bd)">
+          <div style="background:#f8f8f6;border-bottom:1px solid #eee;padding:2px 6px;font-size:7.5px;font-weight:700;letter-spacing:1px;color:#aaa;text-transform:uppercase">Carreta 2</div>
+          <div class="rows" style="padding:2px 0">
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">Placa</span><input class="rv lg" data-f="placa2" value=""></div>
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">Renavam</span><input class="rv mono" data-f="renavam2" value="" style="font-size:9px"></div>
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">UF</span><input class="rv" data-f="uf2" value=""></div>
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">Modelo</span><input class="rv" data-f="modelo2" value="" style="font-size:10px"></div>
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">Carroceria</span><input class="rv" data-f="carroceria2" value="" style="font-size:10px"></div>
+          </div>
+        </div>
+
+        <div>
+          <div style="background:#f8f8f6;border-bottom:1px solid #eee;padding:2px 6px;font-size:7.5px;font-weight:700;letter-spacing:1px;color:#aaa;text-transform:uppercase">Carreta 3</div>
+          <div class="rows" style="padding:2px 0">
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">Placa</span><input class="rv lg" data-f="placa3" value=""></div>
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">Renavam</span><input class="rv mono" data-f="renavam3" value="" style="font-size:9px"></div>
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">UF</span><input class="rv" data-f="uf3" value=""></div>
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">Modelo</span><input class="rv" data-f="modelo3" value="" style="font-size:10px"></div>
+            <div class="row" style="grid-template-columns:52px 1fr"><span class="rl">Carroceria</span><input class="rv" data-f="carroceria3" value="" style="font-size:10px"></div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
+
+  <!-- ROW 3: Supervisor + Produto -->
+  <div class="grid g2" style="border-bottom:none">
+    <div class="cell">
+      <div class="ch">Supervisor de Transportes</div>
+      <div class="rows">
+        <div class="row"><span class="rl">Nome</span><input class="rv" data-f="supervisor" value="THIAGO GOUVEIA"></div>
+      </div>
+      <div class="sig-cell">
+        <span style="font-size:8.5px;color:#aaa;font-weight:600;text-transform:uppercase;letter-spacing:.5px">Assinatura Digital</span>
+        <div class="sig-wrap">
+          <canvas id="sig-canvas"></canvas>
+          <span class="sig-hint" id="sig-hint">✍️ Assine aqui</span>
+        </div>
+        <div class="sig-acts">
+          <button class="sig-btn clr" onclick="limparAssinatura()">✕ Limpar</button>
+          <button class="sig-btn" onclick="salvarAssinaturaPNG()">⬇ Salvar PNG</button>
+        </div>
+      </div>
+    </div>
+    <div class="cell" style="border-right:none">
+      <div class="ch">Produto</div>
+      <div class="rows">
+        <div class="row"><span class="rl">Produto</span><input class="rv" data-f="produto" value="HIDRAX BAN 55"></div>
+        <div class="row"><span class="rl">Tipo</span><input class="rv" data-f="tipo" value="BIG BAG"></div>
+        <div class="row"><span class="rl">Peso Bruto</span><input class="rv mono" data-f="pesoBruto" value=""></div>
+        <div class="row"><span class="rl">Peso Líquido</span><input class="rv lg" data-f="pesoLiquido" value="40.000"></div>
+      </div>
+    </div>
+  </div>
+
 </div><!-- /doc -->
 
-<!-- HISTÓRICO -->
+<!-- ══ HISTÓRICO ══ -->
 <div class="hp">
   <div class="hh">
-    <h2>📋 Histórico</h2>
+    <h2>Histórico</h2>
     <span class="hc" id="hct">0</span>
   </div>
   <div class="hs">
-    <input type="text" id="srch" placeholder="🔍 Motorista, placa, rota…" oninput="render()">
+    <input type="text" id="srch" placeholder="🔍 Buscar motorista, placa…" oninput="render()">
   </div>
   <div class="hl" id="hlist">
-    <div class="he"><span class="icon">📂</span>Nenhuma ordem salva ainda.<br>Preencha e clique em<br><strong>"Salvar no Histórico"</strong>.</div>
+    <div class="he"><span class="ico">📂</span>Nenhuma ordem salva.<br>Clique em <strong>Salvar</strong>.</div>
   </div>
 </div>
 
-</div><!-- /main-wrap -->
+</div><!-- /wrap -->
 <div class="toast" id="toast"></div>
+<div id="pdf-overlay"><div class="pmsg" id="pmsg">📄 Gerando PDF…</div><div class="bwrap"><div class="bbar" id="pbar"></div></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 const KEY = 'ordens_hist';
@@ -261,103 +459,305 @@ async function load() {
   catch(e) { try { const s = localStorage.getItem(KEY); if (s) hist = JSON.parse(s); } catch(_){} }
   render();
 }
-
 async function persist() {
   const raw = JSON.stringify(hist);
   try { await window.storage.set(KEY, raw); } catch(e) {}
   try { localStorage.setItem(KEY, raw); } catch(e) {}
 }
-
 function read() {
   const d = {};
   document.querySelectorAll('[data-f]').forEach(el => d[el.dataset.f] = el.value.trim());
   return d;
 }
-
 function fill(d) {
   document.querySelectorAll('[data-f]').forEach(el => el.value = d[el.dataset.f] || '');
 }
-
 async function salvar() {
   const d = read();
   hist.unshift({ id: Date.now(), motorista: d.motorista || 'Sem nome', dt: new Date().toLocaleString('pt-BR'), d });
-  await persist(); render(); toast('✅ Ordem salva!', 1);
+  await persist(); render(); toast('✅ Salvo!', 1);
 }
-
 function carregar(id) {
   const item = hist.find(h => h.id === id); if (!item) return;
-  fill(item.d); toast('📂 Ordem carregada!', 1);
+  fill(item.d); toast('📂 Carregado!', 1);
   document.getElementById('doc').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
 function duplicar(id, btn) {
   const item = hist.find(h => h.id === id); if (!item) return;
   fill(item.d);
   btn.classList.add('ok'); btn.textContent = '✅ Copiado!';
-  setTimeout(() => { btn.classList.remove('ok'); btn.textContent = '\u29c9 Duplicar'; }, 2000);
-  toast('📋 Dados duplicados no formulário!', 1);
+  setTimeout(() => { btn.classList.remove('ok'); btn.textContent = '⧉ Duplicar'; }, 2000);
+  toast('📋 Duplicado no formulário!', 1);
   document.getElementById('doc').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
 async function deletar(id, e) {
   e.stopPropagation();
-  if (!confirm('Remover esta ordem do histórico?')) return;
+  if (!confirm('Remover esta ordem?')) return;
   hist = hist.filter(h => h.id !== id); await persist(); render(); toast('🗑️ Removido.', 0);
 }
-
 function nova() {
-  if (!confirm('Limpar o formulário para nova ordem?')) return;
+  if (!confirm('Limpar formulário?')) return;
   document.querySelectorAll('[data-f]').forEach(el => el.value = '');
-  toast('➕ Nova ordem iniciada.', 1);
+  toast('➕ Nova ordem.', 1);
 }
-
 function render() {
   const list = document.getElementById('hlist');
-  const ct   = document.getElementById('hct');
-  const q    = (document.getElementById('srch').value || '').toLowerCase();
-  const fil  = hist.filter(h => {
+  const q = (document.getElementById('srch').value || '').toLowerCase();
+  const fil = hist.filter(h => {
     if (!q) return true;
     const d = h.d;
     return [h.motorista, d.placaCavalo, d.placa1, d.origem, d.destino, d.descarga, d.cliente, d.produto]
       .some(v => v && v.toLowerCase().includes(q));
   });
-  ct.textContent = hist.length;
+  document.getElementById('hct').textContent = hist.length;
   if (!fil.length) {
-    list.innerHTML = `<div class="he"><span class="icon">${q ? '🔎' : '📂'}</span>${
-      q ? 'Nenhum resultado para<br><strong>"' + q + '"</strong>'
-        : 'Nenhuma ordem salva ainda.<br>Preencha e clique em<br><strong>"Salvar no Histórico"</strong>.'
+    list.innerHTML = `<div class="he"><span class="ico">${q ? '🔎' : '📂'}</span>${
+      q ? 'Nenhum resultado para<br><strong>"'+q+'"</strong>'
+        : 'Nenhuma ordem salva.<br>Clique em <strong>Salvar</strong>.'
     }</div>`;
     return;
   }
   list.innerHTML = fil.map(h => {
     const d = h.d, id = h.id;
     const rota = [d.origem, d.descarga || d.destino].filter(Boolean).join(' → ') || '—';
-    return `<div class="hi" onclick="carregar(${id})">
-      <div class="hi-top">
-        <span class="hi-mot" title="${h.motorista}">${h.motorista}</span>
-        <span class="hi-dt">${h.dt}</span>
+    return `<div class="hcard" onclick="carregar(${id})">
+      <div class="hc-top">
+        <span class="hc-name" title="${h.motorista}">${h.motorista}</span>
+        <span class="hc-dt">${h.dt}</span>
       </div>
-      <div class="hi-tags">
-        ${d.placaCavalo ? `<span class="tag o">${d.placaCavalo}</span>` : ''}
-        ${d.placa1      ? `<span class="tag">${d.placa1}</span>`       : ''}
-        ${d.produto     ? `<span class="tag">${d.produto}</span>`      : ''}
-        ${d.cliente     ? `<span class="tag">${d.cliente}</span>`      : ''}
+      <div class="hc-tags">
+        ${d.placaCavalo ? `<span class="tag tag-or">${d.placaCavalo}</span>` : ''}
+        ${d.placa1 ? `<span class="tag tag-gr">${d.placa1}</span>` : ''}
+        ${d.cliente ? `<span class="tag tag-gr">${d.cliente}</span>` : ''}
+        ${d.produto ? `<span class="tag tag-gr">${d.produto}</span>` : ''}
       </div>
-      <div class="hi-route"><strong>Rota:</strong> ${rota}</div>
-      <div class="hi-acts">
-        <button class="hbtn hbtn-l"   onclick="carregar(${id});event.stopPropagation()">📂 Carregar</button>
-        <button class="hbtn hbtn-dup" onclick="event.stopPropagation();duplicar(${id},this)">\u29c9 Duplicar</button>
-        <button class="hbtn hbtn-d"   onclick="deletar(${id},event)">🗑️</button>
+      <div class="hc-route">${rota}</div>
+      <div class="hc-acts">
+        <button class="ab ab-load" onclick="carregar(${id});event.stopPropagation()">📂 Carregar</button>
+        <button class="ab ab-dup"  onclick="event.stopPropagation();duplicar(${id},this)">⧉ Duplicar</button>
+        <button class="ab ab-del"  onclick="deletar(${id},event)">🗑️</button>
       </div>
     </div>`;
   }).join('');
 }
-
 function toast(msg, green) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.className = 'toast' + (green ? ' green' : '') + ' show';
-  setTimeout(() => { t.className = 'toast' + (green ? ' green' : ''); }, 2600);
+  setTimeout(() => { t.className = 'toast' + (green ? ' green' : ''); }, 2400);
 }
+async function exportarPDF() {
+  const doc = document.getElementById('doc');
+  const overlay = document.getElementById('pdf-overlay');
+  const bar = document.getElementById('pbar');
+  const msg = document.getElementById('pmsg');
+
+  // show overlay
+  overlay.classList.add('show');
+  msg.textContent = '📐 Capturando layout…';
+  bar.style.width = '15%';
+
+  // brief delay so overlay renders before heavy work
+  await new Promise(r => setTimeout(r, 80));
+
+  try {
+    bar.style.width = '45%';
+    msg.textContent = '🎨 Renderizando…';
+
+    // temporarily blur focused input so no cursor shows
+    if (document.activeElement) document.activeElement.blur();
+
+    const canvas = await html2canvas(doc, {
+      scale: 2.5,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#ffffff',
+      logging: false,
+      onclone: (clonedDoc) => {
+        // replace every input/textarea with a styled div showing its value
+        clonedDoc.querySelectorAll('input[data-f]').forEach(inp => {
+          const div = clonedDoc.createElement('div');
+          div.style.cssText = inp.style.cssText;
+          div.style.display = 'flex';
+          div.style.alignItems = 'center';
+          div.style.height = '22px';
+          div.style.padding = '0 6px';
+          div.style.fontSize = inp.classList.contains('lg') ? '16px'
+                             : inp.classList.contains('mono') ? '13px' : '11px';
+          div.style.fontWeight = inp.classList.contains('lg') || inp.classList.contains('mono') ? '700' : '600';
+          div.style.fontFamily = inp.classList.contains('lg') || inp.classList.contains('mono')
+                               ? "'IBM Plex Mono', monospace" : "'IBM Plex Sans', sans-serif";
+          div.style.color = '#111';
+          div.style.letterSpacing = inp.classList.contains('lg') ? '1px' : inp.classList.contains('mono') ? '.5px' : 'normal';
+          div.style.width = '100%';
+          div.style.background = 'transparent';
+          div.textContent = inp.value;
+          inp.replaceWith(div);
+        });
+        // copy signature canvas into clone
+        const origCanvas = document.getElementById('sig-canvas');
+        const cloneCanvas = clonedDoc.getElementById('sig-canvas');
+        if (origCanvas && cloneCanvas) {
+          const r = origCanvas.getBoundingClientRect();
+          cloneCanvas.width  = origCanvas.width;
+          cloneCanvas.height = origCanvas.height;
+          cloneCanvas.style.width  = r.width  + 'px';
+          cloneCanvas.style.height = r.height + 'px';
+          const cctx = cloneCanvas.getContext('2d');
+          cctx.drawImage(origCanvas, 0, 0);
+          // hide hint in clone
+          const hint = clonedDoc.getElementById('sig-hint');
+          if (hint) hint.style.display = 'none';
+          // hide sig action buttons in clone
+          clonedDoc.querySelectorAll('.sig-acts').forEach(el => el.style.display = 'none');
+        }
+        // obs input
+        clonedDoc.querySelectorAll('input.rv').forEach(inp => {
+          const div = clonedDoc.createElement('div');
+          div.style.cssText = `display:flex;align-items:center;height:22px;padding:0 6px;font-size:10px;font-weight:600;font-family:'IBM Plex Sans',sans-serif;color:#111;width:100%;background:transparent`;
+          div.textContent = inp.value;
+          inp.replaceWith(div);
+        });
+      }
+    });
+
+    bar.style.width = '75%';
+    msg.textContent = '📄 Montando PDF…';
+    await new Promise(r => setTimeout(r, 60));
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+    const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
+    const margin = 8;
+    const imgW = pageW - margin * 2;
+    const imgH = (canvas.height * imgW) / canvas.width;
+
+    // scale to fit one page if needed
+    const finalH = imgH > (pageH - margin * 2) ? (pageH - margin * 2) : imgH;
+    const finalW = (canvas.width * finalH) / canvas.height;
+    const offsetX = margin + (imgW - finalW) / 2;
+
+    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', offsetX, margin, finalW, finalH, undefined, 'FAST');
+
+    bar.style.width = '100%';
+    msg.textContent = '✅ Pronto!';
+    await new Promise(r => setTimeout(r, 400));
+
+    const motorista = document.querySelector('[data-f="motorista"]')?.value || 'ordem';
+    const data = document.querySelector('[data-f="data"]')?.value?.replace(/\//g, '-') || '';
+    pdf.save(`OC_MOTZ_${motorista.split(' ')[0]}_${data}.pdf`);
+
+  } catch(err) {
+    console.error(err);
+    msg.textContent = '❌ Erro ao gerar PDF';
+    await new Promise(r => setTimeout(r, 1500));
+  } finally {
+    overlay.classList.remove('show');
+    bar.style.width = '0%';
+  }
+}
+
+// preenche data automaticamente se estiver vazio
+(function(){
+  const el = document.getElementById('campo-data');
+  if (el && !el.value) {
+    const now = new Date();
+    const dd = String(now.getDate()).padStart(2,'0');
+    const mm = String(now.getMonth()+1).padStart(2,'0');
+    const yy = String(now.getFullYear()).slice(-2);
+    el.value = dd+'/'+mm+'/'+yy;
+  }
+})();
+
+
+// ── ASSINATURA DIGITAL ──
+(function(){
+  const canvas = document.getElementById('sig-canvas');
+  const hint   = document.getElementById('sig-hint');
+  if (!canvas) return;
+
+  // resize canvas to actual pixel size
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr  = window.devicePixelRatio || 1;
+    const data  = canvas.toDataURL(); // preserve drawing
+    canvas.width  = rect.width  * dpr;
+    canvas.height = rect.height * dpr;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.strokeStyle = '#111';
+    ctx.lineWidth   = 2;
+    ctx.lineCap     = 'round';
+    ctx.lineJoin    = 'round';
+    // restore
+    const img = new Image();
+    img.onload = () => ctx.drawImage(img, 0, 0, rect.width, rect.height);
+    img.src = data;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const ctx = canvas.getContext('2d');
+  ctx.strokeStyle = '#111';
+  ctx.lineWidth   = 2;
+  ctx.lineCap     = 'round';
+  ctx.lineJoin    = 'round';
+
+  let drawing = false;
+  let hasSig  = false;
+
+  function pos(e) {
+    const r   = canvas.getBoundingClientRect();
+    const src = e.touches ? e.touches[0] : e;
+    return { x: src.clientX - r.left, y: src.clientY - r.top };
+  }
+
+  function start(e) {
+    e.preventDefault();
+    drawing = true;
+    const p = pos(e);
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+    if (!hasSig) { hint.style.display = 'none'; hasSig = true; }
+  }
+  function move(e) {
+    if (!drawing) return;
+    e.preventDefault();
+    const p = pos(e);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+  }
+  function stop(e) { drawing = false; ctx.beginPath(); }
+
+  canvas.addEventListener('mousedown',  start);
+  canvas.addEventListener('mousemove',  move);
+  canvas.addEventListener('mouseup',    stop);
+  canvas.addEventListener('mouseleave', stop);
+  canvas.addEventListener('touchstart', start, { passive: false });
+  canvas.addEventListener('touchmove',  move,  { passive: false });
+  canvas.addEventListener('touchend',   stop);
+
+  window.limparAssinatura = function() {
+    const r = canvas.getBoundingClientRect();
+    ctx.clearRect(0, 0, r.width, r.height);
+    hint.style.display = '';
+    hasSig = false;
+  };
+
+  window.salvarAssinaturaPNG = function() {
+    if (!hasSig) { toast('⚠️ Nenhuma assinatura para salvar.', 0); return; }
+    const a = document.createElement('a');
+    a.download = 'assinatura_THIAGO_GOUVEIA.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+    toast('✅ Assinatura salva!', 1);
+  };
+
+  // expose canvas so PDF export can include it
+  window._sigCanvas = canvas;
+  window._hasSig    = () => hasSig;
+})();
 
 load();
 </script>

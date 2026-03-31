@@ -781,6 +781,7 @@ function toast(msg, green = false) {
   setTimeout(() => { t.className = 'toast' + (green ? ' green' : ''); }, 2400);
 }
 
+const _sigInited = {};
 function switchTab(name) {
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -789,6 +790,14 @@ function switchTab(name) {
   const idx = { carga: 0, minas: 1, coleta: 2, matogrosso: 3, pianettomg: 4 };
   const btns = document.querySelectorAll('.tab-btn');
   if (idx[name] !== undefined && btns[idx[name]]) btns[idx[name]].classList.add('active');
+  // Init signatures lazily when tab becomes visible
+  const sigMap = { carga: [['sig-go','sig-go-hint']], minas: [['sig-mg','sig-mg-hint']] };
+  if (sigMap[name]) {
+    sigMap[name].forEach(([cid, hid]) => {
+      if (!_sigInited[cid]) { _sigInited[cid] = true; initSig(cid, hid); }
+      else { setTimeout(() => { const c = document.getElementById(cid); if(c){ const r = c.getBoundingClientRect(); if(r.width > 0){ const e = new Event('resize'); window.dispatchEvent(e); }}}, 50); }
+    });
+  }
 }
 
 function maskCPF(el) {
@@ -970,12 +979,12 @@ const GO = (() => {
 
   function read() {
     const d = {};
-    document.querySelectorAll('[data-f]').forEach(el => d[el.dataset.f] = el.value.trim());
+    document.getElementById('go-doc').querySelectorAll('[data-f]').forEach(el => d[el.dataset.f] = el.value.trim());
     return d;
   }
 
   function fill(d) {
-    document.querySelectorAll('[data-f]').forEach(el => { el.value = d[el.dataset.f] || ''; });
+    document.getElementById('go-doc').querySelectorAll('[data-f]').forEach(el => { el.value = d[el.dataset.f] || ''; });
   }
 
   function render() {
@@ -1022,7 +1031,7 @@ const GO = (() => {
 
   function nova() {
     if (!confirm('Limpar formulário?')) return;
-    document.querySelectorAll('[data-f]').forEach(el => el.value = '');
+    document.getElementById('go-doc').querySelectorAll('[data-f]').forEach(el => el.value = '');
     const d = new Date(), dd = String(d.getDate()).padStart(2,'0'), mm = String(d.getMonth()+1).padStart(2,'0'), yy = String(d.getFullYear()).slice(-2);
     const dateEl = document.getElementById('go-data'); if (dateEl) dateEl.value = dd+'/'+mm+'/'+yy;
     toast('➕ Nova ordem GO',true);
@@ -1044,12 +1053,12 @@ const MG = (() => {
 
   function read() {
     const d = {};
-    document.querySelectorAll('[data-fm]').forEach(el => d[el.dataset.fm] = el.value.trim());
+    document.getElementById('mg-doc').querySelectorAll('[data-fm]').forEach(el => d[el.dataset.fm] = el.value.trim());
     return d;
   }
 
   function fill(d) {
-    document.querySelectorAll('[data-fm]').forEach(el => { el.value = d[el.dataset.fm] || ''; });
+    document.getElementById('mg-doc').querySelectorAll('[data-fm]').forEach(el => { el.value = d[el.dataset.fm] || ''; });
   }
 
   function render() {
@@ -1096,7 +1105,7 @@ const MG = (() => {
 
   function nova() {
     if (!confirm('Limpar formulário?')) return;
-    document.querySelectorAll('[data-fm]').forEach(el => el.value = '');
+    document.getElementById('mg-doc').querySelectorAll('[data-fm]').forEach(el => el.value = '');
     const dateEl = document.getElementById('mg-data'); if (dateEl) dateEl.value = dateBR();
     toast('➕ Nova ordem MG',true);
   }
@@ -1301,9 +1310,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Load history from DB
   GO.load(); MG.load(); PGO.load(); PMT.load(); PPMG.load();
 
-  // Init signature pads
+  // Init signature pads — sig-go only (visible tab)
+  // sig-mg is inited lazily when Minas tab is opened (canvas has 0 size when hidden)
   initSig('sig-go', 'sig-go-hint');
-  initSig('sig-mg', 'sig-mg-hint');
+  _sigInited['sig-go'] = true;
 });
 
 // Expose aliases used in HTML buttons

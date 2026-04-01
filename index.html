@@ -457,7 +457,6 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);display:flex;fl
     <h1>PIANETTO TRANSPORTES E LOGÍSTICA LTDA</h1>
     <p>CNPJ: 43.976.512/0001-09 &nbsp;|&nbsp; INSC. EST: 20.101.161-1</p>
     <p>ROD. BR 060 KM 388 SALA 139 – RIO VERDE / GO</p>
-    <p>operacional@pianetto.com.br</p>
   </div>
   <div class="hdoc-label">ORDEM DE COLETA</div>
 </div>
@@ -507,7 +506,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);display:flex;fl
 </div>
 <div class="sec-title"><i class="fas fa-id-card"></i> Dados do Motorista</div>
 <div class="fgrid">
-  <div class="fg col2"><label>Motorista</label><input id="motorista" class="fi" oninput="this.value=this.value.toUpperCase()"><button class="unlock-btn" onclick="PGO.unlock('motorista')"><i class="fas fa-lock-open"></i></button></div>
+  <div class="fg col2"><label>Motorista</label><input id="motorista" class="fi" oninput="this.value=this.value.toUpperCase();const a=document.getElementById('nome_motorista_ass');if(a&&!a._edited)a.value=this.value"><button class="unlock-btn" onclick="PGO.unlock('motorista')"><i class="fas fa-lock-open"></i></button></div>
   <div class="fg"><label>Celular</label><input id="celular" class="fi" oninput="maskPhone(this)"></div>
   <div class="fg"><label>CPF</label><input id="cpf" class="fi" oninput="maskCPF(this)" maxlength="14"><button class="unlock-btn" onclick="PGO.unlock('cpf')"><i class="fas fa-lock-open"></i></button></div>
   <div class="fg"><label>RG</label><input id="rg" class="fi"><button class="unlock-btn" onclick="PGO.unlock('rg')"><i class="fas fa-lock-open"></i></button></div>
@@ -516,7 +515,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);display:flex;fl
   <div class="fg full"><label>Observações</label><textarea id="obs" class="fi" rows="3"></textarea></div>
 </div>
 <div class="assin-row">
-  <div class="assin-box"><div class="assin-line"></div><input id="nome_motorista_ass" class="assin-name" placeholder="Nome do Motorista"><p class="assin-cargo">MOTORISTA</p></div>
+  <div class="assin-box"><div class="assin-line"></div><input id="nome_motorista_ass" class="assin-name" placeholder="Nome do Motorista" oninput="this._edited=!!this.value"><p class="assin-cargo">MOTORISTA</p></div>
   <div class="assin-box"><div class="assin-line"></div><input id="nome_analista" class="assin-name" value="FLAVIO MIGUEL FERREIRA"><p class="assin-cargo">ANALISTA OPERACIONAL</p></div>
 </div>
 <div class="form-footer">
@@ -553,7 +552,6 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);display:flex;fl
     <h1>PIANETTO TRANSPORTES E LOGÍSTICA LTDA</h1>
     <p>CNPJ: 43.976.512/0005-24 &nbsp;|&nbsp; INSC. EST: 141013290</p>
     <p>RUA TIRADENTES, 220 – CUIABÁ / MT</p>
-    <p>operacional@pianetto.com.br</p>
   </div>
   <div class="hdoc-label">ORDEM DE COLETA</div>
 </div>
@@ -603,7 +601,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);display:flex;fl
 </div>
 <div class="sec-title"><i class="fas fa-id-card"></i> Dados do Motorista</div>
 <div class="fgrid">
-  <div class="fg col2"><label>Motorista</label><input id="motorista_mt" class="fi" oninput="this.value=this.value.toUpperCase()"><button class="unlock-btn" onclick="PMT.unlock('motorista_mt')"><i class="fas fa-lock-open"></i></button></div>
+  <div class="fg col2"><label>Motorista</label><input id="motorista_mt" class="fi" oninput="this.value=this.value.toUpperCase();const a=document.getElementById('nome_motorista_ass_mt');if(a&&!a._edited)a.value=this.value"><button class="unlock-btn" onclick="PMT.unlock('motorista_mt')"><i class="fas fa-lock-open"></i></button></div>
   <div class="fg"><label>Celular</label><input id="celular_mt" class="fi" oninput="maskPhone(this)"></div>
   <div class="fg"><label>CPF</label><input id="cpf_mt" class="fi" oninput="maskCPF(this)" maxlength="14"><button class="unlock-btn" onclick="PMT.unlock('cpf_mt')"><i class="fas fa-lock-open"></i></button></div>
   <div class="fg"><label>RG</label><input id="rg_mt" class="fi"><button class="unlock-btn" onclick="PMT.unlock('rg_mt')"><i class="fas fa-lock-open"></i></button></div>
@@ -612,7 +610,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);display:flex;fl
   <div class="fg full"><label>Observações</label><textarea id="obs_mt" class="fi" rows="3"></textarea></div>
 </div>
 <div class="assin-row">
-  <div class="assin-box"><div class="assin-line"></div><input id="nome_motorista_ass_mt" class="assin-name" placeholder="Nome do Motorista"><p class="assin-cargo">MOTORISTA</p></div>
+  <div class="assin-box"><div class="assin-line"></div><input id="nome_motorista_ass_mt" class="assin-name" placeholder="Nome do Motorista" oninput="this._edited=!!this.value"><p class="assin-cargo">MOTORISTA</p></div>
   <div class="assin-box"><div class="assin-line"></div><input id="nome_analista_mt" class="assin-name" value="FLAVIO MIGUEL FERREIRA"><p class="assin-cargo">ANALISTA OPERACIONAL</p></div>
 </div>
 <div class="form-footer">
@@ -649,7 +647,6 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);display:flex;fl
     <h1>PIANETTO TRANSPORTES E LOGÍSTICA LTDA</h1>
     <p>CNPJ: 43.976.512/0003-62 &nbsp;|&nbsp; INSC. EST: 701.397.291.00-89</p>
     <p>RUA RIO GRANDE DO NORTE, 1435 – BELO HORIZONTE / MG</p>
-    <p>operacional@pianetto.com.br</p>
   </div>
   <div class="hdoc-label">ORDEM DE COLETA</div>
 </div>
@@ -699,7 +696,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);display:flex;fl
 </div>
 <div class="sec-title"><i class="fas fa-id-card"></i> Dados do Motorista</div>
 <div class="fgrid">
-  <div class="fg col2"><label>Motorista</label><input id="motorista_mg" class="fi" oninput="this.value=this.value.toUpperCase()"><button class="unlock-btn" onclick="PMG.unlock('motorista_mg')"><i class="fas fa-lock-open"></i></button></div>
+  <div class="fg col2"><label>Motorista</label><input id="motorista_mg" class="fi" oninput="this.value=this.value.toUpperCase();const a=document.getElementById('nome_motorista_ass_mg');if(a&&!a._edited)a.value=this.value"><button class="unlock-btn" onclick="PMG.unlock('motorista_mg')"><i class="fas fa-lock-open"></i></button></div>
   <div class="fg"><label>Celular</label><input id="celular_mg" class="fi" oninput="maskPhone(this)"></div>
   <div class="fg"><label>CPF</label><input id="cpf_mg" class="fi" oninput="maskCPF(this)" maxlength="14"><button class="unlock-btn" onclick="PMG.unlock('cpf_mg')"><i class="fas fa-lock-open"></i></button></div>
   <div class="fg"><label>RG</label><input id="rg_mg" class="fi"><button class="unlock-btn" onclick="PMG.unlock('rg_mg')"><i class="fas fa-lock-open"></i></button></div>
@@ -708,7 +705,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);display:flex;fl
   <div class="fg full"><label>Observações</label><textarea id="obs_mg" class="fi" rows="3"></textarea></div>
 </div>
 <div class="assin-row">
-  <div class="assin-box"><div class="assin-line"></div><input id="nome_motorista_ass_mg" class="assin-name" placeholder="Nome do Motorista"><p class="assin-cargo">MOTORISTA</p></div>
+  <div class="assin-box"><div class="assin-line"></div><input id="nome_motorista_ass_mg" class="assin-name" placeholder="Nome do Motorista" oninput="this._edited=!!this.value"><p class="assin-cargo">MOTORISTA</p></div>
   <div class="assin-box"><div class="assin-line"></div><input id="nome_analista_mg" class="assin-name" value="FLAVIO MIGUEL FERREIRA"><p class="assin-cargo">ANALISTA OPERACIONAL</p></div>
 </div>
 <div class="form-footer">
@@ -748,7 +745,8 @@ async function dbLoad(sheet) {
       let d = {};
       try { d = typeof row.dados === 'string' ? JSON.parse(row.dados) : (row.dados || {}); } catch(e) {}
       return { id: row.id, motorista: row.motorista || '', dt: row.dt || '', d };
-    });
+    })
+    .sort((a, b) => Number(b.id) - Number(a.id));
 }
 
 async function dbSave(sheet, reg) {
@@ -1172,7 +1170,6 @@ function makePianettoModule(cfg) {
       hist.unshift({id:reg.id,motorista:reg.motorista,dt:reg.dt,d:data});
       render();
       toast('✅ Ordem ' + data.oc + ' salva!',true);
-      nova(true);
     } catch(e) { console.error(e); alert('Erro ao salvar: ' + e.message); }
   }
 
@@ -1304,20 +1301,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const mgDate = document.getElementById('mg-data');
   if (mgDate) mgDate.value = dateBR();
 
-  // Init Pianetto forms
-  PGO.init(); PMT.init(); PPMG.init();
+  // Init Pianetto modules
+  PGO.init(); PGO.load();
+  PMT.init(); PMT.load();
+  PPMG.init(); PPMG.load();
 
-  // Load history from DB
-  GO.load(); MG.load(); PGO.load(); PMT.load(); PPMG.load();
+  // Init MOTZ modules
+  GO.load();
+  MG.load();
 
-  // Init signature pads — sig-go only (visible tab)
-  // sig-mg is inited lazily when Minas tab is opened (canvas has 0 size when hidden)
-  initSig('sig-go', 'sig-go-hint');
-  _sigInited['sig-go'] = true;
+  // Init signatures for the default visible tab
+  initSig('sig-go','sig-go-hint');
 });
-
-// Expose aliases used in HTML buttons
-const PMG = PPMG;
 </script>
 </body>
 </html>

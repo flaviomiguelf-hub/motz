@@ -723,24 +723,18 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);display:flex;fl
 'use strict';
 
 // ══════════════════════════════════════════════════════════════
-// DATABASE — SheetDB
+// DATABASE — Google Apps Script (gratuito, sem limite)
+// Substitua a URL abaixo após fazer o deploy do Apps Script
 // ══════════════════════════════════════════════════════════════
-const SDB = 'https://sheetdb.io/api/v1/zu0vf31sk92fq';
-const SHEETS = {
-  motz_go:     SDB + '?sheet=motz_go',
-  motz_mg:     SDB + '?sheet=motz_mg',
-  pianetto_go: SDB + '?sheet=pianetto_go',
-  pianetto_mt: SDB + '?sheet=pianetto_mt',
-  pianetto_mg: SDB + '?sheet=pianetto_mg'
-};
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxjVlCykeXZ3GS30EqrJCqYsJsX4kSa7VBdFsBf_EX1KV3xE30TMw652VL4w4FDIfOvVw/exec';
 
 async function dbLoad(sheet) {
-  const r = await fetch(SHEETS[sheet], { headers: { Accept: 'application/json' } });
-  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const r = await fetch(GAS_URL + '?action=load&sheet=' + sheet);
+  if (\!r.ok) throw new Error('HTTP ' + r.status);
   const rows = await r.json();
-  if (!Array.isArray(rows)) return [];
+  if (\!Array.isArray(rows)) return [];
   return rows
-    .filter(row => row.id && row.id !== 'id')
+    .filter(row => row.id && row.id \!== 'id')
     .map(row => {
       let d = {};
       try { d = typeof row.dados === 'string' ? JSON.parse(row.dados) : (row.dados || {}); } catch(e) {}
@@ -750,20 +744,18 @@ async function dbLoad(sheet) {
 }
 
 async function dbSave(sheet, reg) {
-  const r = await fetch(SDB, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({ data: [reg], sheet })
-  });
-  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const data = encodeURIComponent(JSON.stringify(reg));
+  const r = await fetch(GAS_URL + '?action=save&sheet=' + sheet + '&data=' + data);
+  if (\!r.ok) throw new Error('HTTP ' + r.status);
   return r.json();
 }
 
 async function dbDelete(sheet, id) {
-  const r = await fetch(SDB + '/id/' + id + '?sheet=' + sheet, { method: 'DELETE' });
-  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const r = await fetch(GAS_URL + '?action=delete&sheet=' + sheet + '&id=' + id);
+  if (\!r.ok) throw new Error('HTTP ' + r.status);
   return r.json();
 }
+
 
 function dbReg(motorista, dados) {
   return { id: Date.now().toString(), motorista: motorista || 'Sem nome', dt: new Date().toLocaleString('pt-BR'), dados: JSON.stringify(dados) };

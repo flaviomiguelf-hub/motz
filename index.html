@@ -723,19 +723,20 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);display:flex;fl
 'use strict';
 
 // ══════════════════════════════════════════════════════════════
-// DATABASE — SheetDB
+// DATABASE — Google Apps Script (substitui SheetDB)
 // ══════════════════════════════════════════════════════════════
-const SDB = 'https://sheetdb.io/api/v1/zu0vf31sk92fq';
+const API_URL = 'https://script.google.com/macros/s/AKfycbwWxy3RBKPjUmjEtrvUK4lNT5FD59-wbEWPTeaGtAekNKSKTkN8MV0YfSvgjXUESX_J0A/exec';
+
 const SHEETS = {
-  motz_go:     SDB + '?sheet=motz_go',
-  motz_mg:     SDB + '?sheet=motz_mg',
-  pianetto_go: SDB + '?sheet=pianetto_go',
-  pianetto_mt: SDB + '?sheet=pianetto_mt',
-  pianetto_mg: SDB + '?sheet=pianetto_mg'
+  motz_go:     'motz_go',
+  motz_mg:     'motz_mg',
+  pianetto_go: 'pianetto_go',
+  pianetto_mt: 'pianetto_mt',
+  pianetto_mg: 'pianetto_mg'
 };
 
 async function dbLoad(sheet) {
-  const r = await fetch(SHEETS[sheet], { headers: { Accept: 'application/json' } });
+  const r = await fetch(API_URL + '?sheet=' + encodeURIComponent(SHEETS[sheet]), { method: 'GET' });
   if (!r.ok) throw new Error('HTTP ' + r.status);
   const rows = await r.json();
   if (!Array.isArray(rows)) return [];
@@ -750,17 +751,21 @@ async function dbLoad(sheet) {
 }
 
 async function dbSave(sheet, reg) {
-  const r = await fetch(SDB, {
+  const r = await fetch(API_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({ data: [reg], sheet })
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ data: [reg], sheet: SHEETS[sheet] })
   });
   if (!r.ok) throw new Error('HTTP ' + r.status);
   return r.json();
 }
 
 async function dbDelete(sheet, id) {
-  const r = await fetch(SDB + '/id/' + id + '?sheet=' + sheet, { method: 'DELETE' });
+  const r = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action: 'delete', sheet: SHEETS[sheet], id: String(id) })
+  });
   if (!r.ok) throw new Error('HTTP ' + r.status);
   return r.json();
 }

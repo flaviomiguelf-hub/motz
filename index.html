@@ -181,6 +181,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);display:flex;fl
   <button class="tab-btn" onclick="switchTab('coleta')">📋 Pianetto GO</button>
   <button class="tab-btn" onclick="switchTab('matogrosso')">📋 Pianetto MT</button>
   <button class="tab-btn" onclick="switchTab('pianettomg')">📋 Pianetto MG</button>
+  <button class="tab-btn" onclick="switchTab('pianettoto')">📋 Pianetto TO</button>
 </nav>
 
 <!-- TOAST -->
@@ -719,6 +720,101 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);display:flex;fl
 </div><!-- /wrap -->
 </div><!-- /tab-pianettomg -->
 
+<!-- ═══════════════════════════════════════ TAB: PTO ═══════════════════════════════════════ -->
+<div id="tab-pianettoto" class="tab-pane">
+<div class="tb">
+  <span>✏️ editável</span>
+  <button class="btn b-save" onclick="PTO.salvar()">💾 Salvar</button>
+  <button class="btn b-print" onclick="PTO.exportPDF()">📄 Gerar PDF</button>
+  <button class="btn b-new" onclick="PTO.nova()">➕ Nova Ordem</button>
+  <button class="btn b-new" onclick="PTO.load()" style="margin-left:auto">🔄 Atualizar</button>
+</div>
+<div class="wrap">
+<div class="hp">
+  <div class="hh"><h2>Histórico PTO</h2><span class="hc" id="pto-ct">0</span></div>
+  <div class="hs"><input id="pto-srch" placeholder="🔎 Buscar…" oninput="PTO.render()"></div>
+  <div class="hl" id="pto-list"><div class="he"><span class="ico">📂</span>Nenhuma ordem ainda.</div></div>
+</div>
+<div class="pform">
+<div class="form-card" id="fc-pto">
+<div class="form-header">
+  <div class="hlogo-box"><img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCACKAcIDASIAAhEBAxEB/8QAHAABAAIDAQEBAAAAAAAAAAAAAAYHBAUIAwIB/8QAUhAAAQQBAgMCBwsICAMGBwAAAQACAwQFBhEHEiExQRMUIlFhcbIXMjZUcnOBkZKx0QgVFjM0NZOhI0JSVXSUwfAkN9IYJSZTYoJDREWDwuHx/8QAGwEBAAIDAQEAAAAAAAAAAAAAAAUGAgQHAwH/xAA4EQABAwICBwUHBAIDAQAAAAABAAIDBBEFIQYSMUFRYXGBkaGx0RMWMjRywfAUFSLhM1IjNULx/9oADAMBAAIRAxEAPwDjJEREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREWw09irOby8GMqGMTTkhpedm9AT1+pTP3ItT/APn47+K7/pWn4R/8wsV8t/sOXSQ7FXsXxOeklayO1iL+KquO4xUUM7WRWsRfMcyqHZwh1K4+VZxzf/uuP/4r79x7Ufx3GfxH/wDSr13CbhRJx+r5dygzpPXcu5US7g/qMDcXcYT5vCP/AOlaHPaA1RhonTz44zwN6ukru8IB6wOo+pdKbhFnHpDUtP8AIAhekWlNY138wCOllyEvuCMzTMiaQC9waN/Sdlc/F/QleelNn8PXbFZiBfaiYNhK3vcB/aHo7fWqdx37wr/Ot9oK10NXHWMD2do4K5UWIR1sHtY+0cCpp7l2d2/aqH23fgsDP6Cy2GxcuRs2KjoottwxxJ6nbzK82e9H++5Rfin8Cb3qZ7QV5qsEpYoHvbe4BO1Uyh0lrZ6mOJxFiQDlxKodEKKnroa3OldOX9R25a9IxM8Ezne6QkAddgOg7VJPctzvxuh9t34KW8HcV4lprx14Ikuv5+o/qDo3/Uqbq2UGCQy07Xy3uc/RULFdJqmCrfFBbVbls37/ABVKX+G2cqUZrRmqSiJheWMc4uIHm6KErp+RrXNLXAEEbEHvC551pizh9S3aQG0bZOaP5Duo+/b6FoYxhjKQNfFsORUpo7jUte58c1tYZi3DetMtjp3EWM5lY8dVfGyWQEgyHYdButcpbwl+G1T5EnslRNLGJJmMdsJAVgrZXQ08kjdoBPcFsPctzvxuh9t34L8PC7PDstUD/wC934K5W9gQq4/sFJz71zr3rr+I7lzHaglq2ZK07CyWJxY9p7iF8RtL5GsHa4gBWDxlwXi2RjzUDNorPkTbd0gHQ/SPuUBq/tUXyx96qFVTup5nRO3LoVDWNrKdszd48d4U49y3O/G6H23fgsLN8PsvicVPkZ7FN8UDeZwY525G+3Tp6VeAUe4j/AnKfMj2grPU4JSxwOe29wCdvJUij0lrpqpkTrWLgNnEqhK0Tp7MUDSA6R4YCezcnZTn3Lc78bofbd+ChuH/AHtT+fZ7QXSw/wBVGYNh0NYHmS+VlNaRYvUYe6MQ2zvtHRU37lud+N0Ptu/BPctzvxuh9t34K5Oibj0Kb/YKTn3qte9eIcu5U37lud+N0Ptu/Bednhnm69eWd9qiWxsLzs92+wG/mV0bj0LDzW35oufMP9krF+A0gaSL96zj0pr3PANu5UppvQ2Uz2LbkalioyJz3NAkcQenqC2fuW5343Q+278FMuDxH6FQ/PyfeFMtx6F4UeC000DJHXuRxW1iOklbT1UkTLWBIGSpv3Lc78bofbd+Ce5bnfjdD7bvwVybhCtn9gpOfetL3rxDl3Km/ctzvxuh9t34Lzs8Ms5BXlndaolsbHPID3bkAb+b0K6NwsXLEfmq5/h5PYKwkwGkawkX716Q6U175GtNszwVJ6b0Nlc7i2ZGrPVZE9zmgSOIPQ7dwWy9y3O/G6H23fgppwg+BNf52T2iphuPQvGjwWmmgZI69yOK2cR0kraeqkiZawJGxU37lud+N0Ptu/BPctzvxuh9t34K5N0K2f2Ck5960vevEOXcqb9y3O/G6H23fgvw8Lc7t+10Ptu/BXLuF+OPRP2Ck596++9eIcu5cxTxuhnkhdsXMcWnbs3B2Xy1rnODWgucTsAB1KzrFae5nZataN0s0thzWMaOpJcVcuhtGUsDXZYsRssZBwBdKRuI/Q3zetVehw+SseQ3IDaVd8UxeHDog5+bjsHH0CrjCcPtQ5KNkz4I6cL+odO7ZxHyR1+vZb1vCezt5WZhB9EBP+qtdFaIsApGizgSevoqRNpXXvddhDRyHrdUvlOGWdrML6kte6ANy1p5HfQD0/modep2qNh1e5Xlglb2skbsV0ytXqLA47O0jWvwB39iQDZ7D5wVq1ej0ZbeA2PA7Fu0Gl0rXBtU244jI+h8Fzki3GrcBa09lXU7HlsPlQy7bB7fP6/OFp1VJI3RuLHCxCvkUrJmCRhuDsRERYL0REREREREREREUr4R/wDMLFfLf7Dl0kOxc28I/wDmFivlv9hyvXNaoxuNsigwTX8i4eTTqM8JJ9Pc0ekkKo4/E+WpaGC/8fuVRdJ4ZJqxjWC51fuVV/GXPZjG6zdXoZO3Wi8WjcWRykDc79dlBZNSagkO78zfJ9M7lN9Y16OZ1P47nZni29jY2YrFHxicAdge/blaevdusTMNn09TY+nhsPibDnARwTO8avEE++2O4b6tgpijLGQsj1buty/D1Fwp2hdHFBHEWAusOHnv6gELSYfN62cWuxt3LzDfYcnM9u/1EK19H60vNx7o9V1xVssOzJOZjfCD0t5twfo2KrfJ56xZ3ir4/L3nHoHXZX7A9+0UfK0fTupVw30vM3EGfMwzRukk5o4S4sIb53bdd9/OVux4G7FXez1A3nw7f6Wni4pP0/tKhoHC1tbs/sKX5DXum4d4ZbTXlw2LA5p3B7u30qgX+L/pEfFGubX8a/og4dQ3n6A/QugoMbjajS6KnXj26ucIxv07ye1UHkbQu6tmtNO7ZLnM0+cc/T+SkPdxmDapD7l32Wvo5NA/2ogaQLC5J67l0Sz3o/33KL8U/gTe9TPaClDPej/fcovxT+BN71M9oLoFf8rJ9J8lTcK+ei+oeYVDlZWKpy5DJVqMI/pJ5GsH0lYpU+4LYrxrPTZKRu8dSPZpI/ru6D6hv/JUCkgNRM2Mbz/9XV6+qFJTPmO4eO7xVuUK0dSlDVhG0cMbWN6dwGy/bNqrWMfjViOHwrxHFzb+W89jR6T1Xt2BVPxmzMjc1RoV5OU1NrBI7pCfJ+oD+avlfVCip9cDgB+dFy3C6F2I1XsydtyT+c1bA7FV/G/FeTTzEbe/wEpA+lp+8KwcBkGZTDVMhH2TxB5HmPePr3Cx9YYwZjTl2hygvfGTH6HjqP5j+axr4RV0jg3eLjzCywqodQV7S/KxsfI9y51Ut4S/Dap8iT2Som4Fri1wIIOxBUs4S/Dep8iT2SqPQ/Mx9R5rp2J/Jy/SfJXo3sCbo3sC1OUy7KObx1GXYMu87GuPc8AED6eoXRZJGxt1nbMvHJcfhhfM7VYM7E9wuvvU2KizOEtY6TYeFZ5JI964dQfrXPRglq5PxadhZLFNyPae4grpftVVcXcCYMtVztdh8HO9sc+w7HjsP0gfy9KgMfo9dgnbtG3p/StmieIezlNK85OzHX+x5K1WqP8AEf4E5T5ke0FIGqPcR/gTlPmR7QUvW/Kv+k+Sr2G/PRfUPMKi8P8Avan8+z2gulguacP+9qfz7PaC6WChNGvhk7PurNpn8cXQ/ZRriTkLmL0pPcoTvgsNfGGvb2jdwB7fQqmOuNVn/wCtWPst/BXpk6FPJVXVb0DJ4HEEsd2EjsWp/QvS/wDc1b+f4raxHD6qol14n2FuJ+y0MHxeio6cxzx6zr3vYHhxVQ/pvqv++rP1N/BfMutNUSRPikzFhzHtLXAhvUHt7lcH6F6X/uat/P8AFVVxUx1HF6nbWx9ZleHxZjuRnZuS7qoWtoaykj9o+S42ZEqy4bieH183so4bG18w1abH5/M4+qK1LJWYIQSQxj9gCe1ZH6Wak/vq7/EWkRRAnlaLBx71YHUsDjcsBPQK9uFt25kNKR2b1mSxM6Z453nc7A9ApWVDeD3wLh+ek+9TIroGGkmljJ4Lk2MtDa6UNFhcqh9Qao1DDnshDFmLjI2WZGtaJNgAHHYLAfqrUT2OY/M3C1wIIMnaFjan+EmT/wAXL7ZWuVEmnl13DWO0711KnpYPZNOoNg3BbPH5/NY+qK1LJWYIWkkMY/YAntWQNWak3/fV3+ItIv0dq8mzygWDj3r3dSwuN3MBPQLoHh9asXNJULNqZ80z2OLnvO5PlFb2YkRuI7dio5wy+BGO+Q72ipHP+qd6iuh0RJpmE8B5LkWJNArZQNmsfNUBa1XqNtqVrczdAD3ADwnpXl+lmpP76u/xFqrv7ZN847714rnpqJv9j3ldbFHT2+AdwVpcGMN4Q2NQ2ml0hcYoC4d/9Z389vrVnqPcOYI4NF4xsY99Dzn1uJJUgPmV9wyAQUrAN4uepXK8bqnVNdI47AbDoMv7Ud1pqyjpuBolaZ7Ug3jgadiR5ye4KuZ+J2oXyudFHSiYT0b4Lm2+klR3V+QmyepL1uZxO8zmsB/qtB2A+palVWtxiollPs3arRssr3huj1LBCPasDnEZ3z7Ark0XxDrZWyyhk4m1LTzyxvaf6N583oKnoXL7XOa4OaS1wO4IPULorR1+XJ6Zx92Y7yyQjnPncOhP07bqZwTEpKm8UuZGd+SrekuDRUerPALNJsRz5LX8R8I3M6ana1m9muDNCfSB1H0j/RUIuoHgOGzgCD0IK5py8TYMtbhZ72Od7R6g4rS0jgDXslG/I9ik9D6pz4pIDsbYjt2rFREVaVzREREREREREW00thrGezlbGVujpXeU7uY0e+cfUFi5wY0udsCxe9sbS5xsAtnoXD27Fh+Xdefi8dTBM91p2Ldxtys87iCpLhp7+o7EuF0jCcNho+ty679dIO90knaSevkg/wAlrtSzv1BnKejtNM5cZVf4GFreyR49/K7z9539fnXxq2lktH3H6WxWdmtRXmAzQMj5ertgAep6nbu7lGOJmcAcnnMA7hxPPhfK+Q3qGkcZ3AOID3C7QRsA3nnwvkDkN5KCr/4s8T0DauDlhMVi45w2f/aeDt0af/4rF0rpHHYT/iHc1zIO6yWperifR5vvWBiWYfQOmo3ZCYCzKA6XlG75X7e9aPMOzzKP3OK7/DHxPEDwfcZZep+gDorzQU1FhbQ6oN5LdSP7/Aq9VmvxO7KMH2Yy1jYF1uJyuOQVpbev606BVSOLFrvw8J9Ux/BajNcR8/fjdFXMNBjuhMIPPt8o/wCilH4/SNbdpJPT1UbForXvdZwAHG/oplxR1ZFjaEmJoyh16dvLIWn9Sw9u/pKqLHfvCv8AOt+8Lxke+R5fI5z3OO5c47kle2N/eFf51vtBVarrX1k4e7sHBXrD8Njw6mMbMzvPErphnvR/vuUX4p/Am96me0FKGe9H++5Rfin8Cb3qZ7QV4r/lZPpPkuYYV89F9Q8wqH71e/C3FjG6RrOc3aa1vPJuNu3sH1AKm9L4x2Yz9PHtHSWQc58zR1cfqBXRkTGxxtjYNmtAaB5gFXdHafWe6Y7sh+fm1W/S+s1YmU435noNnj5JIeVhdsTsN9h2qic/g9UZXM2shJhru88hcAWdg7h9SvdOnnU7X4e2tADnEAKsYTizsNLnMYCTxUK4SxZWlh58dk6ViuIZOeEyN2Ba7tA9RG/0qansTp51+9y2aWD9PEI73stKtqv1c7ptW19wVBcSMV+atW242N2hnPh4/U7tH0HdZPCX4bVPkSeyVMeNmLNjD1spG0c1WQsee/kd+BA+tQ7hL8NqnyJPZKp01N+nxMNGzWBHaV0SnrP1eDOedoaQeoH4VejewKtOOEj4hipI3Fr2SPc1w7QRsrLb2BVjx1/U4z5Un3BWPGvkn9nmFTdG88Sj7fIqa6NzDM5p+tfBHhC3kmb/AGXjt/H6Vl5zGwZbGTULA8iQDY97SDuCPUQql4QZ783Zp2MnftXukBu56NkHYfp7PqV0BZYdUtraX+eZ2H85r5jFG7Da68eQ+Jv5yK/GqPcR/gTlPmR7QUjUd4j/AAJynzI9oLZrsqaT6T5LSwvOti+pvmFRWH/e1P59ntBdLBc04f8Ae1P59ntBdLBQejXwydn3Vn0z+OLofssHNZSnh6Drt6QxwNIaXBpPU9i0Huh6Y+Ov/hFZfELF3cxpiehQY1873sIaXBoIDgT1Kq/3OdVfFIf47fxW3iFXWxS6sDLi3AlR+EUGG1EGvVSarr7LgZZcVYvuh6Y+Ov8A4RVZ8TMtRzWo23MfKZIRXawkt26gn8Qvf3OdVfFIf47fxXxPw+1PDC+aSrCGRtLnHw7TsB1KhqybEaqPUkiy27CrFh1NhFDN7WKYE2tm4KJoiKBVrV38HvgXD89J96mRUM4O/AuL5+T71MyuiYZ8pH0C5Bjf/YS/UVzfqf4SZP8Axcvtla5bHU/wkyf+Ll9srXLn83+R3UrrNP8A4WdB5Iv0dq/F+jtXmvZX3wx+BGO+Q72ipHP+qd6io5wx+BGO+Q72ipHP+qd6iuj0PysfQeS45ifz0v1HzXM139sm+cd968V7Xf2yb5x33rxXOCuxDYr+4a2Y7Oisa5n9SMxOHmLSQpGd+0Kp+C+ejgnmwdl/KJ3eErkn+tt1b9IAP0K1+1dCwqoE9K0jaBY9i5LjtI6lrng7Cbjofyy5711i5cTqe5Xka7kfIZYnEe+a47j8PoWjXRGqdN43UNUQ3YyJGb+DmZ0ez/8AXoVf2OFF4TnxfK1nRb9C9jg7b1DcfzVarcEnZKTELtPgrnhmktLJCBO7VcNvPmFXUMb5ZWxRML3vIa1oG5JPYF0ZpfHuxen6OPed3wQta8/+rtP8yVo9IaExmBnbbkkdduN97I9uzWfJb3H0qXdgUxg2GPpbyS/Ed3AKvaR41HXFsMPwjO/Er5kc1jS5x2aOpPmAXNWWmbYyludg2bJM9wHoJKurihnmYjTssEcu1y20xxNB6hp9876un0qi1G6RVAfI2IbtvapjRCkcyF87v/WQ7PzwRERVxXFERERERERFOtIO/MWgsxqEEttW3CjUcO0b9XlQVSvVWSpu0hpzD0Z2S+AhfPZDe6V7uw+kDda1S0v1Wbic+gz+1lp1bDJqR2yJz6DPxsB2rK4W6lwmmL1q9kq1qaw9gjidE1pDW77u7SOp2CzNDPGodfX9R39hFBzWTzHo09jB9A+5b+HLaUpcKXUIbePkyJoOaWco5zI4de7t6qGacyNOhoTORmxG29acyNkZPlFneR9Z+pemDmN9W+oe2xHHfqi4t1KiJAahsz2MLXOIZc32XtccBbNavWObmz2cmuvc7wW/LAwn3jB2fitMh7UWxJI6Rxe45lT8UTImCNgsBkiIiwXoiyMb+8K/zrfaCx19wyOilZKzbmY4OG/nC+tNiCsXC7SF04w+SP8AfcoxxT+BN7/2e0FW/uj6p+M1/wDLtWHmdbZ7LY6ShdnhdBJtzBsIB6elWyqx2nlhfGAbkEbvVUOi0Xq4KlkrnNs0g7TuPRSfgjiy6zcy8jBysb4CMnznYu2+jZWruAqBwes85hse2jQlgjha4u6wtJJJ3O571nDiRqnffxmv/l2rxw/F6algEZBvvyG3vWxi2j9bX1Tpg5ttgzOwdi3XE3V+UqaiNDFXpK8ddgbJybeU89T2juGyi36a6p/vmx9TfwWkuWZrlqW1YeXyyvL3uPeSvFQ0+ITyyOeHkAniVY6XCaaGFsbo2kgZmwzKkP6a6p/vmx9TfwV1aSyYy+nqeQJBdJGA/b+0Oh/mFzot/p/V2bwdN1ShYjbCXl/K+MO2Po3W3huKup5CZiXNI6+aj8ZwFlXCG07WtcDwtl2BXrm6MeTxNrHy7ck8RZv5j3H61TnC6F9fX8EEo2fH4Vjh6QCCvz3R9U/Ga/8Al2rSwahyUGoHZyJ8TbjiSSIxy7kbHp2L3rsTp55opWg3ac+m3itbC8Fq6WmmgeRZ4yzO21uH5ZdFA9Aqy46/qcZ8qT7go57pGqfjVf8Ay7VqNR6lyuoGwtyUsbxCSWckYb29vYvfEcZgqad0TAbm3mOa1cI0cqqOsZPIRYX2E7wRwWoje6ORsjHFrmkFpHaCO9dB6JzTc7p6vdJHhgOSYeZ47fr7fpXPS3OnNS5bACZuNnaxs23O17A4bjv696jMKxD9HKS74Tt+ym8dwn9xhDWWDgcr+I/OC6I3CjvEfb9Ccp8yPaCrD3SNU/Ga/wDAasXLa51Bk8fNRtzwuhmHK8CFoO2+/apqpx6nlhcwA3II3eqrdFotVwVEcrnNs0g7TuPRaTD/AL2p/Ps9oLpUFcxV5XwTxzR7c8bg5u47wd1LfdI1T8Zr/wCXao3CMSiow8SA522KZ0gwafEXMMRA1b7eduRV47jzpuPOqO90jVPxmv8AwGp7pGqfjVf+A1THvFTcD4eqrnuhW/7N7z6K8dx51h5r90XPmH+yVTXukap+M1/4DV8WOIepp4JIZLMBZI0tcPAN7CNli/SGmc0ix8PVZx6JVrXA6ze8+iiZX4iKmroyu/g98C4fnpPvUyJXP+C1lnMLj20aE0TIWuLgHRBx3Pb1Kz/dI1T8ar/5dqtdHjlPDAyNwNwOXqqHiOjFXU1T5mObZxvtPotBqf4SZP8Axcvtla5etueS1alszEGSV5e8gbbkncryVXkcHPJG9XiJpZG1p3BF+jtX4iwXor84ZfAjHfId7RUimP8ARO9RVDYjW+oMVjoqFOxC2CIEMDoWk9Tv2rKdxH1Q4EGzX2I2/UNVtpsdp4oWxkG4AG71VBrNF6uepfK1zbEk7TvPRRa7+2TfOO+9eK+pHl8jnu7XEkr5VSV9C+4ZJIZWSxPcyRhDmuadiCO8K49C69qZSOOjlJG17wGweejJfp7j6FTKLdoq6WjfrM2bxxUdiWFw4hHqSbRsO8LqAEL93XPuG1hqHFNaytkJHxNGwjl8to+vsW8ZxQzwYQ6vScfPyEf6qzx6Q07h/MEHvVJm0RrGu/43Aju/O9XMStDqvVOL0/WLrMoksH3ldhHOT6fMPSqnyXEDUt1nILbKzduvgGBpP09qi80ss8rpZpHySPO7nPcSSfSStWq0iGraBufE+i3aHRBwcHVTsuA9Vn6kzNzO5SS/ccOZ3RjB71je5oWtRFV3vc9xc43JV4jjbG0MYLAIiIsVmiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIp1oLSOjM9jPDZ3iTS07ddP4JlOXF2Jy5vTZ3NGNhuT2KQ8R+FWktFz5fFWOKmPt5/Ggt/NkeIsh0smwIjD9uUE7jrvsqwwv72p/Px+0Fav5QZP/AGqs5sSP++oPujRFVEuOvxRTyyUrLY4JBHM90Tg2Nx7GuO3Q+gr1dhsu2jHedirzakrg2Oc13+DeT2AO22JXUmsdS2NX/lcN4c5p8EGj49QnwmKiAjhuTsbzB8x7Xve8AEk9mwAUO0TxY4sXePmNxN2/esssZqOlPgZIx4tHEJgDEINtmBjRuDsC3lDt+iIqF8Ru8zm+J2N2yiFw8Gekh7GHp77p2dq+sjjr+NseL5GjZpzbc3g54nRu28+zgDsun9Q6qyekdJ8ZcphZWx5B/EHwNe0Wh0lYuM+8sZO/K/lBAd2jmJHVRijqPLao4JYDUOqIbOrcjhddQVqkdneaeeB0TZH1uYgue1xbtsd+1EVF2sRlatKO9axl2CrL+rnkgc2N/qcRsUpYbL3ZRDTxV6zIYxKGRV3vJYex2wHZ6V09qHP5TXMmuBo3iVbyLrmPtSXNG6lx7mOrxN3c9lfcmMSRAeSRyuG3nWh4wa913pbQHDKjp3KXcLj7OmK8z7VN3gn2pGvd5DpB1IYCNmb7Dn326oi50likildFIxzJGnZzXDYg+YhZV3EZWjXisXcZdrQzDeKSaBzGv+SSNiusdNVotTxaO4g6gxdW/r5+lMxer1pa43yc9UtFOd8YH9I8tLz2eV4MHuUH4Ea41pxE17a0nrnLXdR6cydG1JloL7w+Oq1kTnCwzcf0LmODdiNu3bvCIqDhx2QndG2GjakMrDJGGQuPO0drhsOoGx6qVah4d5nEcP8ATmrnssTR5p1wOripIHVRXe1vM8kbbO5tx6irR1/r7P6T4G8NsRpyw3HvyWDsi3ehYBYlg8akaIA89Wxk+UQO07eZfHEPiHrh35PPDpz9X5nfLSZitkXeNu3swsliY1j/AO0A1xAB7AURUXQxGVv15bFHGXbUMX6ySGBz2s9ZA2C8KVO3dstq0qs9md52bFDGXvd6gOq624lag09onUGM05h+KmqtHY3HUKz8dSxOEDq8zXxNd4cvEg8YLySS4jt3Hctbf1ppXF631rcpVdV6WjzWJoR3dQ1cGa8+Ot83M9/gtx4OOwOUnZwJ7t0Rct3qduhZdWu1Z6s7PfRTRljm+sHqF9Y7H38lYFbHUrNyYjfwcETpHbefYDdW5x+j1Dd0ppDNXdY4/WuEcLFahmWV3x3N2ua58Fjn8slu45dydgTsVNtI3NP6S/J20xcra1zWkpM5btOyeQxGL8PNPLG4Bld8we10Ya3ygwe+3JRFzTarz1Z317MMkEzDs+ORpa5p8xB6hSaHRk0vCufXgvxiKLLsxZq+DPMS6Myc/N2bdNtlZH5Qmf0/qLh9pa2zIZ7P5yKxNEM/kcN4n47VAGzDJzETOjdsN+0Bx3WnpED8ku8CQCdZQ7bnb/5VyIqlAJOwG5WZfxOVx8UU1/G3akcw3ifPA5gePQSOqs/8mClA/VOoMrHQgyWaw2nbeRw1SVgka+3GG8r+Q9HlgLnBveR6FKOBmtNYcRtTZfSuusvc1Dpi9irlnJ+Pv8KykY4XPZYY7/4TmvDQCNh5WyIqIxuKymSEhx2NuXBGN5PAQOk5B5zsDspBw501hcznRHqzNWMHi44XTl0VKSexb5XAGKBgGxeevVxDWgEns2Vp8U9W6p4f6a0HhNBZW3gtO2MBVyIs0HeBN+5IN55JJB1e5rvJ5SfJAA2Vn4XKZ3K8S+BWT1DX8UylnA5SWw1sQh5y6Oc+FLRsAXjZ56DcuJ70RckT4mTJZPIP0tjMvcxkUzzCXVy+VkO55PCcgLQ7l2326b7rccM9BZHXFvLQVZH1hjsXayDnmu+QPMDOfwQ27HO7ArY0LrKpX4TaU07+mWoeGGQq2LFiK/FRkdRzHPJ0le5mziWbch6OGwUk0VmNf6b408SMZls3FWsS6ZyOWf8Amh/gqk83ijXQ2mMHQOLdnb7b7koi58p4fAxaLzljMPzlXUdWauKFZtT/AIdzHk85lcerTt73s39Pdo6+IytijJfr4y7NUj9/OyBzo2+twGwV3aAyl3V/CLX9zV+Zt3X3c7p6G5dszF8ngvCytJLj5m/csni7xI4k6N40W9NaZu3MJjMNbbUxGEqgCs6uOXwYMW20vhAQSTuXcyIqBp1LV2wytTrTWZ3nZkcTC9zvUB1K9beMyVN8zLePt13QECZssLmmPfs5tx037t10RlsjqDRvC3V2r8Fp+HSOq72qW0Mw2kzlfia5gEjYo99zE2R7iSQf/T5liU9Y6x1b+SjruTVN21kY6mSxkNS/YHNLIDKXOhMna8MOzgCTy8586Iud0QoiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL7glfBMyaM7PY4OafSDuFuNS6pzWotYWNWZWyybLWJ22JJWxNY0vbtseUDYdg6bLSIiLcal1LmdQ6quanydsvytuwbMs8bRGfCbg8wDdg3qB2Keu/KD4pmBgGcqsuAMa/Isx0DbkrWkbNfOGc7gdgDueo3B33KqpERSfMa71NlsdmsfeuxyV83lRlrzRAxpks+V5QIG7R5bvJGw9Cx8frDUOO0yzTtHIOrUGZNmVYI2hsjLTG8rZGvA5gQPMe3qtAiIrLznHLiLmMPdx1rJ0YzkIDXvW6+NghtWoyOrZJmMD3A9/Xr37qX6u4y5jAYXRuN0nmsbkKMOmasd2laqRW4YbTHSbnkkaQyQAjcj0KhURFJ81xA1jmNaRayu5+2c5A5rq9qNwjMAb71sYbsGNHc0ADqVvtV8auIOpcHZw17J1K9W7t494jj4ar7m3/nPjaHPHnBOx71XSIi3Od1NmM3iMNisjZbLUwtZ1aiwRtaY43PLyCQN3eU4nc7rdYHiXqnD6KsaOikx9rDymVzIrtCKw6u6RvK90TntLoyR3tI69e1QxERWLpTjRr7TeEq4enkKNqrS/YfzhjoLb6noidI0lg8wB2C1+n+Kmu8LqTJ6gr56Wzdy42yXjsbbMVwDsEkcgLXbd3Tp3bKFIiKVcQOIGp9cvpDPW4DWoMcynUq1o69euHEF3JHGA0EkDc7bnYL10BxH1ZoiC1Uwl2B1C4Q6zRuVY7NaVw7HGOQFvMP7Q2KiCIikmvtc6n11kYbupMkbJrx+CrQxxtigrs/sxxsAaweode9bbh/xY1nobCWMNgLdBtGxYFmSK1j4bIMgby8w8I07dPMoKiIp7qTi7rrO5TEZWfI1ad7ESumpWMdQhqPje7YEkxNbzdBtsdx2+cr31fxo1/qjBWMLfyVStSuEOutoY+Go64R1/pXRNaX9eux6ehV2iIuhuEueyVTh9j6mj+MWncLMxz3ZDD6siZ4KtLzHaSq58UjS1w2JA2O++61XFrirbpat0lPpbVkmoMrprHzw2M9LFzNtWbDpDMWNkHVgEnK0kDs6dyo5ERT/R3F7W+lsBFgaN2jbxleQy1a+Sx8NxtZ5O5MXhWnk3PXYdN+uy11DiTrOnxAl143NSzZ+ZzzPYnY2QTNc3lcxzCOUsLenLttttt2KIoiKX53iLqTMVM5Sldj6tPOPqvvVqdCKCJxrgiLlaxo5NuY77bb79d1vcJx14k4nDVcbXzFaU0ovA07drHwT2qrNtg2OZ7S9oHd16d2yrNERS7RnEjWWks5ezGIzMhsZIEZBtpjbEdzcknwrJAWvO5J3I3G52Wy1bxi17qjA3MBlMpXGHt+C5qFenFDBH4Nxc3wbGNAYdzuSOrthvvsFX6IiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIi//9k=" alt="Pianetto"></div>
+  <div class="hinfo">
+    <h1>PIANETTO TRANSPORTES E LOGÍSTICA LTDA</h1>
+    <p>CNPJ: 43.976.512/0008-77 &nbsp;|&nbsp; INSC. EST: 29.552.813-3</p>
+    <p>QUADRA ACSV SE 32, 14, PLANO DIRETOR SUL – PALMAS / TO – CEP 77021-026 &nbsp;|&nbsp; (64) 3050-2875</p>
+  </div>
+  <div class="hdoc-label">ORDEM DE COLETA</div>
+</div>
+<div class="doc-numbers">
+  <div class="doc-num-row">
+    <div class="doc-num-group"><label>Pedido Nº</label><input id="pedido_to" class="doc-num-input editable" type="text"></div>
+    <div class="doc-num-group"><label>OC Nº <span style="background:#c0392b;color:white;font-size:.55rem;padding:.1rem .35rem;border-radius:20px;vertical-align:middle">AUTO</span></label><input id="oc_to" class="doc-num-input oc-input" readonly></div>
+    <div class="doc-num-group"><label>Data Emissão</label><input id="data_emissao_to" class="doc-num-input" type="date"></div>
+    <div class="doc-num-group"><label>Agendamento</label><input id="data_agendamento_to" class="doc-num-input" type="date"></div>
+  </div>
+</div>
+<div id="dup-banner_to" class="dup-banner">
+  <i class="fas fa-copy"></i>
+  <span id="dup-msg_to">Ordem duplicada — confira os dados.</span>
+  <button class="btn-unlock-all" onclick="PTO.unlockAll()">🔓 Desbloquear Todos</button>
+</div>
+<div class="sec-title"><i class="fas fa-box"></i> Dados da Carga</div>
+<div class="fgrid">
+  <div class="fg col2"><label>Remetente</label><input id="remetente_to" class="fi" placeholder="Nome do remetente"><button class="unlock-btn" onclick="PTO.unlock('remetente_to')"><i class="fas fa-lock-open"></i></button></div>
+  <div class="fg"><label>Cidade Origem</label><input id="cidade_origem_to" class="fi" placeholder="Cidade de origem"><button class="unlock-btn" onclick="PTO.unlock('cidade_origem_to')"><i class="fas fa-lock-open"></i></button></div>
+  <div class="fg col2"><label>Recebedor</label><input id="recebedor_to" class="fi" placeholder="Nome do recebedor"><button class="unlock-btn" onclick="PTO.unlock('recebedor_to')"><i class="fas fa-lock-open"></i></button></div>
+  <div class="fg"><label>Destino</label><input id="destino_to" class="fi" placeholder="Cidade/Estado"><button class="unlock-btn" onclick="PTO.unlock('destino_to')"><i class="fas fa-lock-open"></i></button></div>
+  <div class="fg col2"><label>Mercadoria</label><input id="mercadoria_to" class="fi" placeholder="Tipo de mercadoria"><button class="unlock-btn" onclick="PTO.unlock('mercadoria_to')"><i class="fas fa-lock-open"></i></button></div>
+  <div class="fg"><label>Peso Bruto (kg)</label><input id="peso_bruto_to" class="fi" type="number" placeholder="Ex: 47000"><button class="unlock-btn" onclick="PTO.unlock('peso_bruto_to')"><i class="fas fa-lock-open"></i></button></div>
+  <div class="fg col2"><label>Terminal</label><input id="terminal_to" class="fi" placeholder="Terminal de destino"></div>
+  <div class="fg"><label>Modalidade Veículo</label>
+    <select id="modalidade_veiculo_to" class="fi">
+      <option value="">Selecione…</option>
+      <option>RODOCAÇAMBA</option><option>BITREM</option><option>RODOTREM</option>
+      <option>CARRETA SIMPLES</option><option>TRUCK</option><option>VANDERLEIA</option>
+    </select>
+  </div>
+</div>
+<div class="sec-title"><i class="fas fa-truck"></i> Veículos</div>
+<div class="vtable-wrap">
+  <table class="vtable">
+    <thead><tr><th>Tipo</th><th>Cavalo</th><th>Carreta 1</th><th>Dolly</th><th>Carreta 3</th><th>UF</th></tr></thead>
+    <tbody><tr>
+      <td>Placa</td>
+      <td><input id="placa_cav_to" class="fi ti" oninput="this.value=this.value.toUpperCase()"><button class="unlock-btn" onclick="PTO.unlock('placa_cav_to')"><i class="fas fa-lock-open"></i></button></td>
+      <td><input id="placa_car1_to" class="fi ti" oninput="this.value=this.value.toUpperCase()"><button class="unlock-btn" onclick="PTO.unlock('placa_car1_to')"><i class="fas fa-lock-open"></i></button></td>
+      <td><input id="dolly_to" class="fi ti" oninput="this.value=this.value.toUpperCase()"><button class="unlock-btn" onclick="PTO.unlock('dolly_to')"><i class="fas fa-lock-open"></i></button></td>
+      <td><input id="placa_car3_to" class="fi ti" oninput="this.value=this.value.toUpperCase()"><button class="unlock-btn" onclick="PTO.unlock('placa_car3_to')"><i class="fas fa-lock-open"></i></button></td>
+      <td><input id="uf_to" class="fi ti" maxlength="2" oninput="this.value=this.value.toUpperCase()"><button class="unlock-btn" onclick="PTO.unlock('uf_to')"><i class="fas fa-lock-open"></i></button></td>
+    </tr></tbody>
+  </table>
+</div>
+<div class="sec-title"><i class="fas fa-id-card"></i> Dados do Motorista</div>
+<div class="fgrid">
+  <div class="fg col2"><label>Motorista</label><input id="motorista_to" class="fi" oninput="this.value=this.value.toUpperCase();const a=document.getElementById('nome_motorista_ass_to');if(a&&!a._edited)a.value=this.value"><button class="unlock-btn" onclick="PTO.unlock('motorista_to')"><i class="fas fa-lock-open"></i></button></div>
+  <div class="fg"><label>Celular</label><input id="celular_to" class="fi" oninput="maskPhone(this)"></div>
+  <div class="fg"><label>CPF</label><input id="cpf_to" class="fi" oninput="maskCPF(this)" maxlength="14"><button class="unlock-btn" onclick="PTO.unlock('cpf_to')"><i class="fas fa-lock-open"></i></button></div>
+  <div class="fg"><label>RG</label><input id="rg_to" class="fi"><button class="unlock-btn" onclick="PTO.unlock('rg_to')"><i class="fas fa-lock-open"></i></button></div>
+  <div class="fg"><label>CNH</label><input id="cnh_to" class="fi"><button class="unlock-btn" onclick="PTO.unlock('cnh_to')"><i class="fas fa-lock-open"></i></button></div>
+  <div class="fg full"><label>Local de Coleta</label><input id="local_coleta_to" class="fi"></div>
+  <div class="fg full"><label>Observações</label><textarea id="obs_to" class="fi" rows="3"></textarea></div>
+</div>
+<div class="assin-row">
+  <div class="assin-box"><div class="assin-line"></div><input id="nome_motorista_ass_to" class="assin-name" placeholder="Nome do Motorista" oninput="this._edited=!!this.value"><p class="assin-cargo">MOTORISTA</p></div>
+  <div class="assin-box"><div class="assin-line"></div><input id="nome_analista_to" class="assin-name" value="FLAVIO MIGUEL FERREIRA"><p class="assin-cargo">ANALISTA OPERACIONAL</p></div>
+</div>
+<div class="form-footer">
+  <button class="btn-pform btn-save" onclick="PTO.salvar()"><i class="fas fa-save"></i> Salvar</button>
+  <button class="btn-pform btn-pdf" onclick="PTO.exportPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
+  <button class="btn-pform btn-clear" onclick="PTO.nova()"><i class="fas fa-plus"></i> Nova</button>
+  <button class="btn-pform btn-atualizar" onclick="PTO.load()"><i class="fas fa-sync"></i> Atualizar</button>
+</div>
+</div><!-- /form-card -->
+</div><!-- /pform -->
+</div><!-- /wrap -->
+</div><!-- /tab-pianettoto -->
+
 <script>
 'use strict';
 
@@ -732,7 +828,8 @@ const SHEETS = {
   motz_mg:     'motz_mg',
   pianetto_go: 'pianetto_go',
   pianetto_mt: 'pianetto_mt',
-  pianetto_mg: 'pianetto_mg'
+  pianetto_mg: 'pianetto_mg',
+  pianetto_to: 'pianetto_to'
 };
 
 async function dbLoad(sheet) {
@@ -790,7 +887,7 @@ function switchTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   const pane = document.getElementById('tab-' + name);
   if (pane) pane.classList.add('active');
-  const idx = { carga: 0, minas: 1, coleta: 2, matogrosso: 3, pianettomg: 4 };
+  const idx = { carga: 0, minas: 1, coleta: 2, matogrosso: 3, pianettomg: 4, pianettoto: 5 };
   const btns = document.querySelectorAll('.tab-btn');
   if (idx[name] !== undefined && btns[idx[name]]) btns[idx[name]].classList.add('active');
   // Init signatures lazily when tab becomes visible
@@ -1314,6 +1411,12 @@ const PMG = makePianettoModule({
   analista: 'FLAVIO MIGUEL FERREIRA'
 });
 
+const PTO = makePianettoModule({
+  sheet: 'pianetto_to', suffix: '_to', sid: 'pto', fcId: 'fc-pto', modName: 'PTO',
+  ocKey: 'pto_oc', ocPrefix: 'OC-TO-', pedKey: 'pto_ped', pedPrefix: 'PED-TO-',
+  analista: 'FLAVIO MIGUEL FERREIRA'
+});
+
 // ══════════════════════════════════════════════════════════════
 // INIT ON DOM READY
 // ══════════════════════════════════════════════════════════════
@@ -1328,6 +1431,7 @@ document.addEventListener('DOMContentLoaded', () => {
   PGO.init(); PGO.load();
   PMT.init(); PMT.load();
   PMG.init(); PMG.load();
+  PTO.init(); PTO.load();
 
   // Init MOTZ modules
   GO.load();
